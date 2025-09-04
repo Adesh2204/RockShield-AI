@@ -162,7 +162,7 @@ const Leaderboard: React.FC = () => {
               className="bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-xl p-6 border border-yellow-500/30 text-center"
             >
               <motion.div
-                animate={{ bounce: [0, -10, 0] }}
+                animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
                 className="text-4xl mb-3"
               >

@@ -143,7 +143,7 @@ const Demo: React.FC = () => {
 
           <div className="bg-slate-900 rounded-2xl p-6 shadow-xl border border-slate-700 text-center">
             <motion.div
-              animate={{ bounce: [0, -10, 0] }}
+              animate={{ y: [0, -10, 0] }}
               transition={{ duration: 2, repeat: Infinity, repeatDelay: 2 }}
               className="text-4xl mb-3"
             >

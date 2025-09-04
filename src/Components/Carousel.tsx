@@ -39,7 +39,7 @@ const Carousel: React.FC = () => {
         >
           <div className="flex items-center justify-center gap-3 mb-4">
             <motion.div
-              animate={{ bounce: [0, -5, 0] }}
+              animate={{ y: [0, -5, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
               className="bg-gradient-to-r from-orange-400 to-orange-500 p-3 rounded-full"
             >

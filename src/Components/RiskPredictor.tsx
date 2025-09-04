@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calculator, Brain, TrendingUp } from 'lucide-react';
+import './RiskPredictor.css';
 
 const RiskPredictor: React.FC = () => {
   const [inputs, setInputs] = useState({
@@ -222,27 +223,6 @@ const RiskPredictor: React.FC = () => {
         </div>
       </div>
 
-      <style jsx>{`
-        .slider::-webkit-slider-thumb {
-          appearance: none;
-          height: 20px;
-          width: 20px;
-          border-radius: 50%;
-          background: linear-gradient(45deg, #f97316, #ea580c);
-          cursor: pointer;
-          box-shadow: 0 4px 8px rgba(249, 115, 22, 0.4);
-        }
-        
-        .slider::-moz-range-thumb {
-          height: 20px;
-          width: 20px;
-          border-radius: 50%;
-          background: linear-gradient(45deg, #f97316, #ea580c);
-          cursor: pointer;
-          border: none;
-          box-shadow: 0 4px 8px rgba(249, 115, 22, 0.4);
-        }
-      `}</style>
     </section>
   );
 };

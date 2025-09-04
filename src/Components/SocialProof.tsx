@@ -5,7 +5,7 @@ import { Award, Github, Star, Users, Zap, Target } from 'lucide-react';
 const SocialProof: React.FC = () => {
   const achievements = [
     {
-      icon: Trophy,
+      icon: Award,
       title: 'Best AI Innovation',
       subtitle: 'Mining Tech Hackathon 2024',
       color: 'from-yellow-400 to-yellow-600',
@@ -48,7 +48,6 @@ const SocialProof: React.FC = () => {
     }
   ];
 
-  const Trophy = Award;
 
   return (
     <section className="py-20 bg-slate-800">

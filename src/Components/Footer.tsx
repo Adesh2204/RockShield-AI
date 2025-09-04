@@ -136,7 +136,7 @@ const Footer: React.FC = () => {
           <div className="bg-gradient-to-r from-orange-500/20 to-yellow-500/20 rounded-xl p-6 border border-orange-500/30">
             <div className="flex items-center justify-center gap-4 flex-wrap">
               <motion.div
-                animate={{ bounce: [0, -5, 0] }}
+                animate={{ y: [0, -5, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
                 className="text-2xl"
               >
