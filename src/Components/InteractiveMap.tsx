@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, AlertTriangle, CheckCircle, AlertCircle } from 'lucide-react';
-import { MineData } from '../types';
+import { MineData } from '../Types';
 import { minesData } from '../data/mockData';
 
 const InteractiveMap: React.FC = () => {

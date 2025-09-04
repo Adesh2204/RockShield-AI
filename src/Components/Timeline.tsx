@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Clock, AlertTriangle, Shield, Search } from 'lucide-react';
-import { TimelineEvent } from '../types';
 import { timelineData } from '../data/mockData';
 
 const Timeline: React.FC = () => {
@@ -127,52 +126,7 @@ const Timeline: React.FC = () => {
             </div>
           </div>
 
-          {/* Navigation Controls */}
-          <div className="flex justify-center items-center gap-4 mt-8">
-            <motion.button
-              onClick={prevStory}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-full transition-all duration-200 shadow-lg"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </motion.button>
-
-            <div className="flex gap-2">
-              {storiesData.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentStory(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentStory ? 'bg-orange-400 scale-125' : 'bg-slate-600'
-                  }`}
-                />
-              ))}
-            </div>
-
-            <motion.button
-              onClick={nextStory}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-full transition-all duration-200 shadow-lg"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </motion.button>
-          </div>
-
-          {/* Auto-play indicator */}
-          <div className="flex justify-center mt-4">
-            <button
-              onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                isAutoPlaying
-                  ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30'
-                  : 'bg-slate-700 text-gray-400 border border-slate-600'
-              }`}
-            >
-              {isAutoPlaying ? '⏸️ Auto-playing' : '▶️ Play stories'}
-            </button>
-          </div>
+          {/* Note: Navigation controls removed due to being out of scope for timeline */}
         </motion.div>
       </div>
     </section>

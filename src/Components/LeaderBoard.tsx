@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Trophy, Shield, TrendingUp, Award, Users, Calendar } from 'lucide-react';
-import { LeaderboardData } from '../types';
+import { LeaderboardData } from '../Types';
 import { leaderboardData } from '../data/mockData';
 
 const Leaderboard: React.FC = () => {

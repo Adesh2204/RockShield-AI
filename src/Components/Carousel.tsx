@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Bot } from 'lucide-react';
-import { Story } from '../types';
+import { Story } from '../Types';
 import { storiesData } from '../data/mockData';
 
 const Carousel: React.FC = () => {

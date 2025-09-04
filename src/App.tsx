@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Navigation from './components/Navigation';
-import Hero from './components/Hero';
-import InteractiveMap from './components/InteractiveMap';
-import HazardFeed from './components/HazardFeed';
-import RiskPredictor from './components/RiskPredictor';
-import Leaderboard from './components/Leaderboard';
-import Carousel from './components/Carousel';
-import Timeline from './components/Timeline';
-import Demo from './components/Demo';
-import ChatBot from './components/ChatBot';
-import SocialProof from './components/SocialProof';
-import Footer from './components/Footer';
+import Navigation from './Components/Navigation';
+import Hero from './Components/Hero';
+import InteractiveMap from './Components/InteractiveMap';
+import HazardFeed from './Components/HazardFeed';
+import RiskPredictor from './Components/RiskPredictor';
+import Leaderboard from './Components/LeaderBoard';
+import Carousel from './Components/Carousel';
+import Timeline from './Components/Timeline';
+import Demo from './Components/Demo';
+import ChatBot from './Components/ChatBot';
+import SocialProof from './Components/SocialProof';
+import Footer from './Components/Footer';
 
 function App() {
   const [activeSection, setActiveSection] = useState('hero');

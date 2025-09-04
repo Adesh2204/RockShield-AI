@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertTriangle, Shield, Wrench, Cloud } from 'lucide-react';
-import { Alert } from '../types';
+import { Alert } from '../Types';
 import { alertsData } from '../data/mockData';
 
 const HazardFeed: React.FC = () => {

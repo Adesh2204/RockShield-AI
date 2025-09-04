@@ -1,4 +1,4 @@
-import { MineData, Alert, TimelineEvent, LeaderboardData, Story } from '../types';
+import { MineData, Alert, TimelineEvent, LeaderboardData, Story } from '../Types';
 
 export const minesData: MineData[] = [
   {
