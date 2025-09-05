@@ -12,7 +12,7 @@ It combines **AI, IoT sensors, drone/DEM data, and real-time dashboards** to hel
 
 ---
 
-🧠 Machine Learning Pipeline
+## 🧠 Machine Learning Pipeline
 	•	Data Sources: DEMs, geotechnical IoT sensors, weather logs, and synthetic rockfall events.
 	•	Feature Engineering: Displacement, strain, rainfall, temperature, slope geometry.
 	•	Explainability: SHAP for feature importance, LIME for event-based explainability.
