@@ -115,21 +115,21 @@ export const storiesData: Story[] = [
     id: 'story-1',
     title: 'The Great Jharia Rescue',
     description: 'RockyBot detected unstable rock formations 2 hours before a potential collapse.',
-    image: 'https://images.pexels.com/photos/162568/mining-excavator-coal-mining-machinery-162568.jpeg',
+    image: 'https://images.pexels.com/photos/2577274/pexels-photo-2577274.jpeg',
     outcome: '45 workers safely evacuated, zero injuries'
   },
   {
     id: 'story-2',
     title: 'Weather Alert Success',
     description: 'AI predicted dangerous conditions during monsoon season at Talcher mine.',
-    image: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg',
+    image: 'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg',
     outcome: 'Operations halted, preventing weather-related accidents'
   },
   {
     id: 'story-3',
     title: 'Equipment Malfunction Prevention',
     description: 'Smart sensors detected equipment anomalies before catastrophic failure.',
-    image: 'https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg',
+    image: 'https://images.pexels.com/photos/1287145/pexels-photo-1287145.jpeg',
     outcome: 'Maintenance scheduled, production continued safely'
   }
 ];
