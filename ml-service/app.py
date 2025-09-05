@@ -153,4 +153,4 @@ def predict_stability():
 
 if __name__ == '__main__':
     # Bind to all interfaces and disable the reloader to avoid intermittent restarts during requests
-    app.run(host='0.0.0.0', port=5000, debug=False, use_reloader=False, threaded=True)
+    app.run(host='0.0.0.0', port=5001, debug=False, use_reloader=False, threaded=True)
