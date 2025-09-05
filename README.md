@@ -1,61 +1,44 @@
-![RockShield-AI Banner](banner.png)
+RockShield AI
+Real-Time Rockfall Prediction & Alert System for Open-Pit Mines
+RockShield AI is an open-source, machine learning-powered platform designed to predict and prevent dangerous rockfall events in open-pit mining environments. It combines drone imagery, digital elevation models, live geotechnical and environmental sensor data, and state-of-the-art AI to deliver real-time risk mapping, probability-based forecasts, and instant alerts—making modern mine safety accessible, affordable, and scalable.
 
-# RockShield-AI – AI-Powered Rockfall Prediction & Alert System
-=============================================================
+🚀 Features
+	•	Multi-source Data Integration: Processes DEMs, drone-captured images, displacement/strain/pore-pressure sensors, rainfall, temperature, and vibration data.
+	•	ML-Based Risk Prediction: Trains robust machine learning models (e.g., SVM, ensemble algorithms) to classify hazardous zones using both real and synthetic data.
+	•	Interactive Dashboard: Visualises live risk maps, trendlines, and recent alerts; enables easy zone and incident exploration.
+	•	Real-Time Alerting: Automatically dispatches SMS/email notifications to mine operators about emergent threats, including AI-generated suggested action plans.
+	•	Open Hardware Integration: Ready for low-cost sensor platforms, supporting scalable safety for mines of every size.
+	•	Scalable & Customizable: Modular codebase enabling adaptation for new sites, sensors, and regulatory needs.
 
-RockShield-AI is an AI-driven system designed to predict rockfall incidents in open-pit mines. By integrating machine learning, IoT sensor data, and real-time visualizations, it generates risk heatmaps, delivers actionable alerts, and offers explainable insights—making slope stability monitoring more accessible, scalable, and cost-effective.
+📸 Screenshots
+https://github.com/Adesh2204/RockShield-AI/blob/ca2edfba314d42c3fccbf20581a4f4aeb912cd87/RockShield-AI.png
 
-Key Features:
-- 🗺️ Risk Heatmaps: Visualize slope instability probabilities across terrain.
-- 📢 Alert Mechanism: Automated notifications (SMS/email) trigger when thresholds are exceeded.
-- 🤖 Explainable AI: Understand prediction drivers via interpretable models (e.g., feature importance, SHAP values).
-- 🌍 Multi-Source Data: Combines terrain/DEM, simulated or real sensor streams, environmental factors, and optional drone imagery.
-- 📊 Web Dashboard: Interactive UI for map-based risk exploration, historic replay, and what-if scenarios.
+📚 Documentation
+	•	Setup guide: See `/docs/setup.md` for installation, hardware integration, and data source examples.
+	•	ML details: `/docs/modelling.md` describes feature engineering, training procedures, and kernel comparisons.
+	•	API reference: `/docs/api.md` for REST endpoints and integration instructions.
 
-Technology Stack:
-⚙️ Backend: Node.js + TypeScript, powered by Vite build tool.  
-🎨 Frontend: Modern web UI (React, TailwindCSS) bundled via Vite.  
-📈 Data Models: Machine learning models (e.g., XGBoost, time-series models) integrated into backend analytics.  
-✉️ Notifications: SMS/email via services like Twilio (configurable).  
-🛰️ GIS: Risk overlay maps using Leaflet or similar libraries.  
+🎯 Project Impact
+RockShield AI empowers safer, more resilient mining by providing instant situational awareness and actionable, proactive recommendations to planners and field personnel. Its open-source design encourages adaptation for global mining operations—public and private alike.
 
-Installation, Setup & Running:
-1. Clone the repository:
-   git clone https://github.com/Adesh2204/RockShield-AI.git
-   cd RockShield-AI
+🛠️ Getting Started
+	1.	Clone this repository: 
+ git clone https://github.com/YOUR-USERNAME/rockshield-ai.git
+cd rockshield-ai
+2.	Install dependencies:
+	•	Python >= 3.8 (for ML and backend)
+	•	Node.js >= 16 (for frontend/dashboard)
+	•	See `/backend/requirements.txt` and `/frontend/package.json` for details.
+	3.	Run the backend server:
+ cd backend
+pip install -r requirements.txt
+python app.py
+	4.	Start the frontend:
+ cd frontend
+npm install
+npm start
 
-2. Install dependencies:
-   npm install
-
-3. Configure environment variables:
-   Copy .env.example to .env and fill in details such as:
-   - 🔑 API keys for SMS/email (e.g., Twilio credentials)
-   - 📂 Paths to DEM data or sensor data endpoints
-   - 🗺️ Map tiles / geospatial API keys (if applicable)
-
-4. Build and run the application:
-   npm run dev       # start in development mode
-   npm run build     # build for production
-   npm run preview   # preview production build
-
-5. Access the app in your browser at:
-   http://localhost:3000   (or the port indicated in console)
-
-Usage:
-- 📡 Upload or reference terrain data and/or sensor time-series input (real or simulated).
-- 🗺️ View the dashboard to explore current risk zones via heatmaps.
-- 🔔 Observe automated alerts when risk crosses predefined thresholds—check explanations and suggestions.
-- ⏳ Use the time-slider and what-if scenarios to assess forecasted risk (e.g., rising rainfall, sensor trends).
-- 🧪 For hackathon demos, use synthetic datasets with a scripted scenario to showcase alerts.
-- 🛠️ For pilots, integrate with real-time sensor streams and drone-derived DEMs for dynamic risk mapping.
-
-License:
-This project is open-source and is released under the MIT License. See the LICENSE file for full details.
-
-Contact:
-For questions, feedback, or collaboration, reach out via GitHub Issues or pull requests.
-
--------------------------------------------------------------
-✨ RockShield-AI turns raw data into actionable safety insights,
-helping mine planners reduce risks and protect lives.
--------------------------------------------------------------
+⚡ Demo
+	•	Live risk map: View real-time, colour-coded risk overlays powered by open-source satellite tech (Mapbox GL/Leaflet).
+	•	Interactive widgets: Use the risk simulator to explore how environmental changes affect hazard predictions.
+	•	Alert timeline & leaderboard: Scroll recent incidents, and see stats on mines protected and incidents prevented.
