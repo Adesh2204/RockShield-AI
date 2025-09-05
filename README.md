@@ -50,13 +50,3 @@ Risk Scores & Alerts ───────► Dashboard (Streamlit / React+Mapbo
 ### 1️⃣ Clone the Repository
 ```bash
 https://github.com/Adesh2204/RockShield-AI
-
-### 2️⃣ Install Dependencies
-pip install -r requirements.txt
-
-### 3️⃣ Run the Dashboard
-streamlit run app.py
-
-### 4️⃣ Simulate Data
-python simulate_sensors.py
-
