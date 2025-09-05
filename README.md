@@ -31,7 +31,7 @@ It combines **AI, IoT sensors, drone/DEM data, and real-time dashboards** to hel
 
 ## 🏗️ System Architecture
 
-1. Data Sources
+### 1. Data Sources
 IoT Sensors (displacement, strain, weather)
 Drone / DEM data
 Synthetic rockfall event logs
@@ -39,21 +39,21 @@ Synthetic rockfall event logs
 
 ⬇️
 
-2. Data Pipeline
+### 2. Data Pipeline
 Ingests sensor, DEM, and synthetic data.
 Performs feature engineering: computes displacement, strain, rainfall, temperature, slope geometry.
 Feeds data to the ML inference layer.
 
 ⬇️
 
-3. ML Inference & Explainability
+### 3. ML Inference & Explainability
 Models: XGBoost, Random Forest.
 Uses SHAP and LIME for explainable AI outputs.
 Generates risk scores for slope instability predictions.
 
 ⬇️
 
-4. Outputs
+### 4. Outputs
 Risk metrics are used to:
 Populate the Dashboard (built with React + Mapbox).
 Trigger Automated Alerts via SMS (Twilio).
