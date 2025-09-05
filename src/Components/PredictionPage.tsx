@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 
 const API_BASE = '/api';
 
 const PredictionPage: React.FC = () => {
+  const navigate = useNavigate();
   const [formRisk, setFormRisk] = useState({
     latitude: 23.5,
     longitude: 85.3,
@@ -105,6 +108,15 @@ const PredictionPage: React.FC = () => {
     <section className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 py-16">
       <div className="max-w-5xl mx-auto px-4">
         <div className="mb-8">
+          <motion.button
+            onClick={() => navigate('/')}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="mb-6 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors duration-200"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Home
+          </motion.button>
           <h1 className="text-3xl font-bold text-white">Rockfall Risk Prediction</h1>
           <p className="text-slate-300">Enter parameters to get the high-risk probability.</p>
         </div>
