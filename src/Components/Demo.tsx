@@ -4,6 +4,52 @@ import { Play, Monitor, Users, BarChart3, Map, Bell } from 'lucide-react';
 
 const Demo: React.FC = () => {
   const [activeDemo, setActiveDemo] = useState<string | null>(null);
+  const [isLaunching, setIsLaunching] = useState(false);
+  const [launchError, setLaunchError] = useState<string | null>(null);
+  const [predictionResult, setPredictionResult] = useState<null | {
+    highRiskProbability?: number;
+    factorOfSafety?: number;
+  }>(null);
+  const [showModal, setShowModal] = useState(false);
+
+  const API_BASE = '/api';
+
+  const handleLaunchDemo = async () => {
+    setShowModal(true);
+    setIsLaunching(true);
+    setLaunchError(null);
+    setPredictionResult(null);
+    try {
+      // Sample payload for rockfall risk prediction
+      const riskPayload = {
+        latitude: 23.5,
+        longitude: 85.3,
+        landslide_trigger: 'Rainfall',
+        landslide_size: 'Medium',
+        admin_division_name: 'Jharkhand',
+        annual_rainfall_mm: 1200
+      };
+
+      const riskRes = await fetch(`${API_BASE}/predict_risk`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(riskPayload)
+      });
+
+      if (!riskRes.ok) {
+        const err = await riskRes.json().catch(() => ({}));
+        throw new Error(err.error || `Risk API error (${riskRes.status})`);
+      }
+
+      const riskData = await riskRes.json();
+
+      setPredictionResult({ highRiskProbability: riskData.high_risk_probability });
+    } catch (e: any) {
+      setLaunchError(e?.message || 'Failed to launch demo');
+    } finally {
+      setIsLaunching(false);
+    }
+  };
 
   const demoFeatures = [
     {
@@ -58,12 +104,13 @@ const Demo: React.FC = () => {
 
           {/* Main Demo Launch Button */}
           <motion.button
+            onClick={handleLaunchDemo}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-12 py-6 rounded-2xl font-bold text-xl shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 inline-flex items-center gap-4"
           >
             <Play className="w-8 h-8" />
-            Launch Full Demo
+            {isLaunching ? 'Connecting…' : 'Launch Full Demo'}
             <motion.div
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1, repeat: Infinity }}
@@ -71,7 +118,70 @@ const Demo: React.FC = () => {
               →
             </motion.div>
           </motion.button>
+          {launchError && (
+            <div className="mt-6 text-red-400 text-sm">{launchError}</div>
+          )}
+          {predictionResult && (
+            <div className="mt-6 inline-block bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm">
+              <span className="font-semibold">ML Connected:</span> High-risk probability {Math.round((predictionResult.highRiskProbability || 0) * 100)}%
+            </div>
+          )}
         </motion.div>
+
+        {/* Modal for ML Demo */}
+        {showModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+            <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 w-full max-w-lg shadow-2xl">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-white font-semibold text-lg">Live ML Risk Prediction</h3>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="text-slate-300 hover:text-white"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div className="text-sm text-slate-300">
+                  The model is running with sample inputs. You can change to a real API later.
+                </div>
+
+                <div className="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                  {isLaunching && (
+                    <div className="text-white">Connecting to ML service…</div>
+                  )}
+                  {!isLaunching && launchError && (
+                    <div className="text-red-400">{launchError}</div>
+                  )}
+                  {!isLaunching && predictionResult && (
+                    <div className="text-white">
+                      High-risk probability: {Math.round((predictionResult.highRiskProbability || 0) * 100)}%
+                    </div>
+                  )}
+                  {!isLaunching && !launchError && !predictionResult && (
+                    <div className="text-slate-300">Idle</div>
+                  )}
+                </div>
+
+                <div className="flex justify-end gap-3">
+                  <button
+                    onClick={handleLaunchDemo}
+                    className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-2 rounded-lg text-sm font-semibold"
+                  >
+                    Rerun Prediction
+                  </button>
+                  <button
+                    onClick={() => setShowModal(false)}
+                    className="bg-white/10 text-white px-4 py-2 rounded-lg text-sm border border-white/10"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Demo Features Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
