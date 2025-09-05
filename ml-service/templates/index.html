@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RockShield AI - Rockfall Predictor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #000000;
+            --primary-color: #161616;
+            --secondary-color: #2b2b2b;
+            --accent-color: #0096FF;
+            --text-color: #ffffff;
+            --border-color: #2a2a2a;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: linear-gradient(var(--border-color) 1px, transparent 1px), linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: var(--primary-color);
+            border-radius: 16px;
+            box-shadow: 0 0 25px rgba(0, 150, 255, 0.1), 0 0 50px rgba(0, 150, 255, 0.1);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        header {
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        header span {
+            color: var(--accent-color);
+        }
+        header p {
+            margin: 10px 0 0;
+            color: #b0b0b0;
+            font-size: 1.1em;
+        }
+        .tabs {
+            display: flex;
+            background-color: transparent;
+        }
+        .tab-link {
+            flex: 1;
+            padding: 18px;
+            cursor: pointer;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #a0a0a0;
+        }
+        .tab-link:hover {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+        .tab-link.active {
+            border-bottom-color: var(--accent-color);
+            background-color: transparent;
+            color: var(--text-color);
+        }
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #c0c0c0;
+        }
+        .form-group input, .form-group select {
+            padding: 12px;
+            background-color: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 1em;
+            width: 100%;
+            box-sizing: border-box;
+            transition: all 0.2s ease-in-out;
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 150, 255, 0.3);
+        }
+        .submit-btn {
+            grid-column: 1 / -1;
+            padding: 15px;
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 8px;
+            color: #0d0d0d;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        .submit-btn:hover {
+            background-color: #00a5d9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 150, 255, 0.2);
+        }
+        .result-box {
+            grid-column: 1 / -1;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2em;
+            display: none;
+            border-left: 5px solid;
+        }
+        .result-box.success {
+            background-color: rgba(40, 167, 69, 0.1);
+            border-left-color: var(--success-color);
+            color: #a3ffb9;
+        }
+        .result-box.warning {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-left-color: var(--warning-color);
+            color: #ffe08a;
+        }
+        .result-box.danger {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-left-color: var(--danger-color);
+            color: #ff9a9a;
+        }
+        .result-box.error {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-left-color: var(--danger-color);
+            color: #ff8a8a;
+        }
+        .result-box strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RockShield<span> AI</span></h1>
+            <p>Predictive Analytics for Mine Safety</p>
+        </header>
+
+        <div class="tabs">
+            <div class="tab-link active" onclick="openTab(event, 'risk')">Rockfall Event Risk</div>
+            <div class="tab-link" onclick="openTab(event, 'stability')">Slope Stability</div>
+        </div>
+
+        <div id="risk" class="tab-content active">
+            <form id="riskForm" class="form-grid">
+                <div class="form-group">
+                    <label for="latitude">Latitude</label>
+                    <input type="number" step="any" id="latitude" placeholder="e.g., 31.1048" required>
+                </div>
+                <div class="form-group">
+                    <label for="longitude">Longitude</label>
+                    <input type="number" step="any" id="longitude" placeholder="e.g., 77.1734" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin_division_name">Location (Admin Division)</label>
+                    <select id="admin_division_name" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="landslide_trigger">Landslide Trigger</label>
+                    <select id="landslide_trigger" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="landslide_size">Landslide Size</label>
+                    <select id="landslide_size" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="annual_rainfall_mm">Annual Rainfall (mm)</label>
+                    <input type="number" step="any" id="annual_rainfall_mm" placeholder="e.g., 1500.0" required>
+                </div>
+                <button type="submit" class="submit-btn">Predict Risk</button>
+                <div id="riskResult" class="result-box"></div>
+            </form>
+        </div>
+
+        <div id="stability" class="tab-content">
+            <form id="stabilityForm" class="form-grid">
+                <div class="form-group">
+                    <label for="unitWeight">Unit Weight (kN/m³)</label>
+                    <input type="number" step="any" id="unitWeight" placeholder="e.g., 20.0" required>
+                </div>
+                <div class="form-group">
+                    <label for="cohesion">Cohesion (kPa)</label>
+                    <input type="number" step="any" id="cohesion" placeholder="e.g., 40.0" required>
+                </div>
+                <div class="form-group">
+                    <label for="frictionAngle">Internal Friction Angle (°)</label>
+                    <input type="number" step="any" id="frictionAngle" placeholder="e.g., 38.0" required>
+                </div>
+                <div class="form-group">
+                    <label for="slopeAngle">Slope Angle (°)</label>
+                    <input type="number" step="any" id="slopeAngle" placeholder="e.g., 30.0" required>
+                </div>
+                <div class="form-group">
+                    <label for="slopeHeight">Slope Height (m)</label>
+                    <input type="number" step="any" id="slopeHeight" placeholder="e.g., 12.0" required>
+                </div>
+                <div class="form-group">
+                    <label for="porePressure">Pore Water Pressure Ratio</label>
+                    <input type="number" step="any" id="porePressure" placeholder="e.g., 0.2" required>
+                </div>
+                <div class="form-group">
+                    <label for="reinforcementType">Reinforcement Type</label>
+                    <select id="reinforcementType" required></select>
+                </div>
+                <button type="submit" class="submit-btn">Predict Stability</button>
+                <div id="stabilityResult" class="result-box"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://127.0.0.1:5000';
+
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab-link");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        function populateDropdown(selectId, options) {
+            const selectElement = document.getElementById(selectId);
+            if (!selectElement) return;
+            selectElement.innerHTML = '';
+            options.forEach(optionValue => {
+                const option = document.createElement('option');
+                option.value = optionValue;
+                option.textContent = optionValue.charAt(0).toUpperCase() + optionValue.slice(1).replace(/_/g, ' ');
+                selectElement.appendChild(option);
+            });
+        }
+
+        window.onload = async function() {
+            try {
+                const response = await fetch(`${API_URL}/options`);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const options = await response.json();
+                populateDropdown('landslide_trigger', options.triggers);
+                populateDropdown('landslide_size', options.sizes);
+                populateDropdown('admin_division_name', options.divisions);
+                populateDropdown('reinforcementType', options.reinforcements);
+            } catch (error) {
+                console.error('Failed to fetch model options:', error);
+                const riskResult = document.getElementById('riskResult');
+                riskResult.style.display = 'block';
+                riskResult.className = 'result-box error';
+                riskResult.innerHTML = '<strong>Connection Error</strong> Failed to load model options from the server.';
+            }
+        };
+
+        document.getElementById('riskForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const resultBox = document.getElementById('riskResult');
+            resultBox.style.display = 'none';
+
+            const formData = {
+                latitude: parseFloat(document.getElementById('latitude').value),
+                longitude: parseFloat(document.getElementById('longitude').value),
+                admin_division_name: document.getElementById('admin_division_name').value,
+                landslide_trigger: document.getElementById('landslide_trigger').value,
+                landslide_size: document.getElementById('landslide_size').value,
+                annual_rainfall_mm: parseFloat(document.getElementById('annual_rainfall_mm').value)
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/predict_risk`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                const result = await response.json();
+                resultBox.style.display = 'block';
+
+                if (response.ok) {
+                    const prob = result.high_risk_probability;
+                    const probPercent = (prob * 100).toFixed(2);
+                    let riskLevel, resultClass;
+
+                    if (prob >= 0.75) {
+                        riskLevel = 'High Risk'; resultClass = 'danger';
+                    } else if (prob >= 0.4) {
+                        riskLevel = 'Moderate Risk'; resultClass = 'warning';
+                    } else {
+                        riskLevel = 'Low Risk'; resultClass = 'success';
+                    }
+                    resultBox.className = `result-box ${resultClass}`;
+                    resultBox.innerHTML = `<strong>${riskLevel}</strong> Probability of Casualties: ${probPercent}%`;
+                } else {
+                    resultBox.className = 'result-box error';
+                    resultBox.innerHTML = `<strong>Prediction Error</strong> ${result.error || 'An unknown error occurred.'}`;
+                }
+            } catch (error) {
+                resultBox.style.display = 'block';
+                resultBox.className = 'result-box error';
+                resultBox.innerHTML = '<strong>Connection Error</strong> Could not connect to the prediction server.';
+            }
+        });
+
+        document.getElementById('stabilityForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const resultBox = document.getElementById('stabilityResult');
+            resultBox.style.display = 'none';
+
+            const formData = {
+                'Unit Weight (kN/m³)': parseFloat(document.getElementById('unitWeight').value),
+                'Cohesion (kPa)': parseFloat(document.getElementById('cohesion').value),
+                'Internal Friction Angle (°)': parseFloat(document.getElementById('frictionAngle').value),
+                'Slope Angle (°)': parseFloat(document.getElementById('slopeAngle').value),
+                'Slope Height (m)': parseFloat(document.getElementById('slopeHeight').value),
+                'Pore Water Pressure Ratio': parseFloat(document.getElementById('porePressure').value),
+                'Reinforcement Type': document.getElementById('reinforcementType').value
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/predict_stability`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                const result = await response.json();
+                resultBox.style.display = 'block';
+
+                if (response.ok) {
+                    const fos = result.factor_of_safety;
+                    let stabilityLevel, resultClass;
+
+                    if (fos < 1.0) {
+                        stabilityLevel = 'Unstable'; resultClass = 'danger';
+                    } else if (fos < 1.25) {
+                        stabilityLevel = 'Questionable Stability'; resultClass = 'warning';
+                    } else {
+                        stabilityLevel = 'Stable'; resultClass = 'success';
+                    }
+                    resultBox.className = `result-box ${resultClass}`;
+                    resultBox.innerHTML = `<strong>${stabilityLevel}</strong> Factor of Safety: ${fos.toFixed(2)}`;
+                } else {
+                    resultBox.className = 'result-box error';
+                    resultBox.innerHTML = `<strong>Prediction Error</strong> ${result.error || 'An unknown error occurred.'}`;
+                }
+            } catch (error) {
+                resultBox.style.display = 'block';
+                resultBox.className = 'result-box error';
+                resultBox.innerHTML = '<strong>Connection Error</strong> Could not connect to the prediction server.';
+            }
+        });
+    </script>
+</body>
+</html>
+
