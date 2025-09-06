@@ -10,7 +10,6 @@ import Carousel from './Components/Carousel';
 import Timeline from './Components/Timeline';
 import Demo from './Components/Demo';
 import ChatBot from './Components/ChatBot';
-import SocialProof from './Components/SocialProof';
 import Footer from './Components/Footer';
 
 function App() {
@@ -84,7 +83,6 @@ function App() {
       <Demo />
       <Leaderboard />
       <Carousel />
-      <SocialProof />
       <Footer />
 
       {/* Chat Bot */}

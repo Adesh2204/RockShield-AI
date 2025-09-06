@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Shield, TrendingUp, Award, Users, Calendar } from 'lucide-react';
+import { Trophy, Shield, TrendingUp, Users, Calendar } from 'lucide-react';
 import { LeaderboardData } from '../Types';
 import { leaderboardData } from '../data/mockData';
 
@@ -144,53 +144,6 @@ const Leaderboard: React.FC = () => {
           />
         </div>
 
-        {/* Achievement Showcase */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="bg-slate-900 rounded-2xl p-8 shadow-2xl border border-slate-700"
-        >
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <Award className="w-8 h-8 text-yellow-400" />
-            <h3 className="text-2xl font-bold text-white">Recent Achievements</h3>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-xl p-6 border border-yellow-500/30 text-center"
-            >
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                className="text-4xl mb-3"
-              >
-                🏆
-              </motion.div>
-              <h4 className="text-yellow-400 font-bold mb-2">Zero Incidents</h4>
-              <p className="text-yellow-200 text-sm">30 consecutive days without major incidents</p>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-xl p-6 border border-green-500/30 text-center"
-            >
-              <div className="text-4xl mb-3">🎯</div>
-              <h4 className="text-green-400 font-bold mb-2">Perfect Score</h4>
-              <p className="text-green-200 text-sm">100% alert accuracy this week</p>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl p-6 border border-purple-500/30 text-center"
-            >
-              <div className="text-4xl mb-3">🌟</div>
-              <h4 className="text-purple-400 font-bold mb-2">Innovation Award</h4>
-              <p className="text-purple-200 text-sm">Best AI safety implementation 2024</p>
-            </motion.div>
-          </div>
-        </motion.div>
 
         {/* Live Counter Animation */}
         <motion.div

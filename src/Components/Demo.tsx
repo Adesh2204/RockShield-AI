@@ -257,10 +257,10 @@ const Demo: React.FC = () => {
               transition={{ duration: 2, repeat: Infinity, repeatDelay: 2 }}
               className="text-4xl mb-3"
             >
-              🏆
+              🚀
             </motion.div>
-            <div className="text-2xl font-bold text-white mb-2">15</div>
-            <div className="text-gray-400">Industry Awards</div>
+            <div className="text-2xl font-bold text-white mb-2">24/7</div>
+            <div className="text-gray-400">Monitoring Active</div>
           </div>
         </motion.div>
 
