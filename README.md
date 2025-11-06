@@ -469,8 +469,6 @@ See [LICENSE](LICENSE) file for details.
 
 ### Core Team
 - **Adesh** - [@Adesh2204](https://github.com/Adesh2204) - Lead Developer
-- **Aniket Veer Koppaka** - [@Aniketkoppaka](https://github.com/Aniketkoppaka) - ML Engineer
-- **Aagam Kala** - [@aagam-kala2005](https://github.com/aagam-kala2005) - Frontend Developer
 
 ### Special Thanks
 To all contributors and supporters who made this project possible!
