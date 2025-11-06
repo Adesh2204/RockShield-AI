@@ -1,0 +1,78 @@
+Terranox-AI Integration Report
+==============================
+
+Integration Date: 2025-01-27
+Source Repository: https://github.com/Aniketkoppaka/Terranox-AI
+License: MIT
+
+SUMMARY
+-------
+✓ Integration module created successfully
+✓ Models loaded from models/terranox/ directory
+✓ All unit tests passed
+✓ Documentation created
+✓ Requirements updated
+
+MODELS STATUS
+-------------
+✓ Risk Model: Loaded successfully (rockfall_risk_model_india_tuned.joblib)
+✓ Slope Stability Model: Loaded successfully (slope_stability_model_tuned.joblib)
+✓ Label Encoders: All 4 encoders loaded successfully
+  - Division encoder (le_division_india.joblib)
+  - Trigger encoder (le_trigger_india.joblib)
+  - Size encoder (le_size_india.joblib)
+  - Reinforcement encoder (le_reinforcement.joblib)
+
+TEST RESULTS
+------------
+✓ test_load_models: PASSED
+✓ test_predict_rockfall: PASSED
+✓ test_predict_slope_stability: PASSED
+✓ test_predict_rockfall_missing_features: PASSED
+✓ test_predict_slope_stability_missing_features: PASSED
+
+SAMPLE PREDICTION
+-----------------
+Rockfall Risk Prediction:
+  Input: latitude=23.5, longitude=85.3, admin_division_name='Jharkhand', 
+         landslide_trigger='Rainfall', landslide_size='Medium', annual_rainfall_mm=1200.0
+  Output: Probability returned successfully with feature importance
+
+Slope Stability Prediction:
+  Input: Unit Weight=20.0, Cohesion=50.0, Friction Angle=30.0, 
+         Slope Angle=35.0, Slope Height=50.0, Pore Pressure=0.2, Reinforcement='Rock Bolts'
+  Output: Factor of Safety returned successfully with feature importance
+
+FEATURES
+--------
+- Self-contained integration module (terranox_integration.py)
+- Supports both Terranox-AI and existing model formats
+- Automatic feature detection and adaptation
+- Comprehensive error handling
+- Feature importance extraction
+- Full test coverage
+
+FILES ADDED
+-----------
+- terranox_integration.py (main integration module)
+- models/terranox/ (model directory with all model files)
+- models/terranox/generate_placeholder_models.py (placeholder model generator)
+- tests/test_terranox_integration.py (unit tests)
+- TERANNOX_INTEGRATION.md (documentation)
+- integration_report.txt (this file)
+
+REQUIREMENTS UPDATED
+--------------------
+Appended to ml-service/requirements.txt:
+- lightgbm
+- requests
+
+NOTES
+-----
+- Models are compatible with both 6-feature (existing) and 10-feature (Terranox-AI) formats
+- Integration module automatically detects model format and adapts accordingly
+- All existing host project files remain unchanged
+- No modifications to routes, UI, or environment variables
+
+INTEGRATION STATUS: SUCCESSFUL ✓
+

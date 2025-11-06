@@ -13,13 +13,24 @@ le_division = None
 le_reinforcement = None
 
 try:
-    model_risk = joblib.load('models/rockfall_risk_model.joblib')
-    le_trigger = joblib.load('models/risk_trigger_encoder.joblib')
-    le_size = joblib.load('models/risk_size_encoder.joblib')
-    le_division = joblib.load('models/risk_division_encoder.joblib')
-    model_slope = joblib.load('models/slope_stability_model.joblib')
-    le_reinforcement = joblib.load('models/slope_reinforcement_encoder.joblib')
-    print("Models and encoders loaded successfully.")
+    # Try loading from local ml-service/models directory first
+    try:
+        model_risk = joblib.load('models/rockfall_risk_model.joblib')
+        le_trigger = joblib.load('models/risk_trigger_encoder.joblib')
+        le_size = joblib.load('models/risk_size_encoder.joblib')
+        le_division = joblib.load('models/risk_division_encoder.joblib')
+        model_slope = joblib.load('models/slope_stability_model.joblib')
+        le_reinforcement = joblib.load('models/slope_reinforcement_encoder.joblib')
+        print("Models and encoders loaded successfully from local directory.")
+    except FileNotFoundError:
+        # Fallback to terranox models directory
+        model_risk = joblib.load('../models/terranox/rockfall_risk_model.joblib')
+        le_trigger = joblib.load('../models/terranox/risk_trigger_encoder.joblib')
+        le_size = joblib.load('../models/terranox/risk_size_encoder.joblib')
+        le_division = joblib.load('../models/terranox/risk_division_encoder.joblib')
+        model_slope = joblib.load('../models/terranox/slope_stability_model.joblib')
+        le_reinforcement = joblib.load('../models/terranox/slope_reinforcement_encoder.joblib')
+        print("Models and encoders loaded successfully from terranox directory.")
 except Exception as e:
     # Keep running with graceful fallbacks
     print(f"Warning: Failed to load one or more model files: {e}")
