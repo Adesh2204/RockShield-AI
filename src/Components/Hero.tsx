@@ -112,7 +112,7 @@ const Hero: React.FC<HeroProps> = ({ onScrollToDemo }) => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.5 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center"
+            className="flex flex-col sm:flex-row gap-6 justify-center flex-wrap"
           >
             <motion.button
               onClick={() => navigate('/predict')}
@@ -132,6 +132,16 @@ const Hero: React.FC<HeroProps> = ({ onScrollToDemo }) => {
             >
               📊
               Risk Analytics
+            </motion.button>
+
+            <motion.button
+              onClick={() => navigate('/satellite-map')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gradient-to-r from-purple-500 to-purple-600 text-white px-8 py-4 rounded-2xl font-semibold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 flex items-center gap-3 justify-center"
+            >
+              🛰️
+              Satellite Map
             </motion.button>
             
             <motion.button

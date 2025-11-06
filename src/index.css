@@ -1,3 +1,22 @@
+/* Leaflet CSS - must be imported first */
+@import 'leaflet/dist/leaflet.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom styles for Leaflet popups */
+.leaflet-popup-content-wrapper {
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.leaflet-popup-tip {
+  background: white;
+}
+
+/* Fix for custom markers */
+.custom-marker {
+  background: transparent !important;
+  border: none !important;
+}
