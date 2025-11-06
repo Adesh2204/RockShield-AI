@@ -162,6 +162,103 @@ def predict_stability():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
+
+@app.route('/analytics', methods=['GET'])
+def get_analytics():
+    """
+    Endpoint to provide aggregated risk analytics data for different locations in India
+    """
+    try:
+        # Sample analytics data - in production, this would come from a database
+        analytics_data = {
+            'locations': [
+                {
+                    'location': 'Jharkhand',
+                    'highRisk': 45,
+                    'mediumRisk': 30,
+                    'lowRisk': 25,
+                    'total': 100,
+                    'coordinates': {'lat': 23.3441, 'lng': 85.3096}
+                },
+                {
+                    'location': 'Odisha',
+                    'highRisk': 38,
+                    'mediumRisk': 35,
+                    'lowRisk': 27,
+                    'total': 100,
+                    'coordinates': {'lat': 20.9517, 'lng': 85.0985}
+                },
+                {
+                    'location': 'Chhattisgarh',
+                    'highRisk': 42,
+                    'mediumRisk': 28,
+                    'lowRisk': 30,
+                    'total': 100,
+                    'coordinates': {'lat': 21.2787, 'lng': 81.8661}
+                },
+                {
+                    'location': 'Maharashtra',
+                    'highRisk': 35,
+                    'mediumRisk': 40,
+                    'lowRisk': 25,
+                    'total': 100,
+                    'coordinates': {'lat': 19.7515, 'lng': 75.7139}
+                },
+                {
+                    'location': 'Karnataka',
+                    'highRisk': 30,
+                    'mediumRisk': 38,
+                    'lowRisk': 32,
+                    'total': 100,
+                    'coordinates': {'lat': 15.3173, 'lng': 75.7139}
+                },
+                {
+                    'location': 'Madhya Pradesh',
+                    'highRisk': 40,
+                    'mediumRisk': 32,
+                    'lowRisk': 28,
+                    'total': 100,
+                    'coordinates': {'lat': 22.9734, 'lng': 78.6569}
+                }
+            ],
+            'monthlyTrends': [
+                {'month': 'Jan', 'incidents': 12, 'riskScore': 65},
+                {'month': 'Feb', 'incidents': 15, 'riskScore': 70},
+                {'month': 'Mar', 'incidents': 18, 'riskScore': 75},
+                {'month': 'Apr', 'incidents': 22, 'riskScore': 80},
+                {'month': 'May', 'incidents': 28, 'riskScore': 85},
+                {'month': 'Jun', 'incidents': 35, 'riskScore': 90},
+                {'month': 'Jul', 'incidents': 42, 'riskScore': 88},
+                {'month': 'Aug', 'incidents': 38, 'riskScore': 82},
+                {'month': 'Sep', 'incidents': 30, 'riskScore': 75},
+                {'month': 'Oct', 'incidents': 25, 'riskScore': 70},
+                {'month': 'Nov', 'incidents': 20, 'riskScore': 68},
+                {'month': 'Dec', 'incidents': 16, 'riskScore': 65}
+            ],
+            'riskDistribution': [
+                {'name': 'High Risk', 'value': 38, 'color': '#ef4444'},
+                {'name': 'Medium Risk', 'value': 34, 'color': '#f59e0b'},
+                {'name': 'Low Risk', 'value': 28, 'color': '#10b981'}
+            ],
+            'triggers': [
+                {'trigger': 'Rainfall', 'count': 45, 'percentage': 42},
+                {'trigger': 'Earthquake', 'count': 30, 'percentage': 28},
+                {'trigger': 'Human Activity', 'count': 25, 'percentage': 23},
+                {'trigger': 'Natural Erosion', 'count': 8, 'percentage': 7}
+            ],
+            'summary': {
+                'totalLocations': 6,
+                'highRiskPercentage': 38,
+                'mediumRiskPercentage': 34,
+                'lowRiskPercentage': 28,
+                'totalIncidents': 291
+            }
+        }
+        
+        return jsonify(analytics_data)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 if __name__ == '__main__':
     # Bind to all interfaces and disable the reloader to avoid intermittent restarts during requests
     app.run(host='0.0.0.0', port=5001, debug=False, use_reloader=False, threaded=True)

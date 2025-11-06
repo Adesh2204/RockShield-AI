@@ -125,6 +125,17 @@ const Hero: React.FC<HeroProps> = ({ onScrollToDemo }) => {
             </motion.button>
             
             <motion.button
+              onClick={() => navigate('/analytics')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-2xl font-semibold shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 flex items-center gap-3 justify-center"
+            >
+              📊
+              Risk Analytics
+            </motion.button>
+            
+            <motion.button
+              onClick={onScrollToDemo}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-2xl font-semibold border border-white/20 hover:bg-white/20 transition-all duration-300"
