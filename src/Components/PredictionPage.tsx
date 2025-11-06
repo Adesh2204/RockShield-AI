@@ -363,7 +363,7 @@ const PredictionPage: React.FC = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-orange-400/30 shadow-xl p-6"
+              className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-orange-400/30 shadow-xl p-6 overflow-hidden"
             >
               <div className="flex items-center gap-3 mb-6">
                 <TrendingUp className="w-6 h-6 text-orange-400" />
@@ -387,17 +387,19 @@ const PredictionPage: React.FC = () => {
                   transition={{ duration: 0.5 }}
                   className="space-y-6"
                 >
-                  <div className="relative">
-                    <div className="flex items-center justify-center">
-                      <div className={`relative w-40 h-40 rounded-full flex items-center justify-center ${
-                        resultRisk.high_risk_probability > 0.7 
-                          ? 'bg-gradient-to-br from-red-500/20 to-red-600/20 border-4 border-red-500/50'
-                          : resultRisk.high_risk_probability > 0.4
-                          ? 'bg-gradient-to-br from-orange-500/20 to-orange-600/20 border-4 border-orange-500/50'
-                          : 'bg-gradient-to-br from-green-500/20 to-green-600/20 border-4 border-green-500/50'
-                      }`}>
-                        <div className="text-center">
-                          <div className={`text-5xl font-bold ${
+                  <div className="relative flex items-center justify-center py-8 overflow-hidden">
+                    <div className={`relative w-52 h-52 rounded-full flex items-center justify-center shadow-2xl overflow-hidden ${
+                      resultRisk.high_risk_probability > 0.7 
+                        ? 'bg-gradient-to-br from-red-500/20 to-red-600/20 border-[6px] border-red-500/50'
+                        : resultRisk.high_risk_probability > 0.4
+                        ? 'bg-gradient-to-br from-orange-500/20 to-orange-600/20 border-[6px] border-orange-500/50'
+                        : 'bg-gradient-to-br from-green-500/20 to-green-600/20 border-[6px] border-green-500/50'
+                    }`}>
+                      {/* Inner content container - prevents any overflow */}
+                      <div className="absolute inset-0 flex items-center justify-center rounded-full overflow-hidden">
+                        {/* Percentage display */}
+                        <div className="text-center z-20 relative">
+                          <div className={`text-6xl font-bold ${
                             resultRisk.high_risk_probability > 0.7 
                               ? 'text-red-400'
                               : resultRisk.high_risk_probability > 0.4
@@ -406,8 +408,21 @@ const PredictionPage: React.FC = () => {
                           }`}>
                             {Math.round(resultRisk.high_risk_probability * 100)}%
                           </div>
-                          <div className="text-white text-xs mt-1">Risk Level</div>
+                          <div className="text-white text-sm mt-2 font-medium">Risk Level</div>
                         </div>
+
+                        {/* Animated ring indicator - stays within circle */}
+                        <motion.div
+                          className={`absolute inset-2 rounded-full ${
+                            resultRisk.high_risk_probability > 0.7 
+                              ? 'border-t-[3px] border-r-[3px] border-red-400/60'
+                              : resultRisk.high_risk_probability > 0.4
+                              ? 'border-t-[3px] border-r-[3px] border-orange-400/60'
+                              : 'border-t-[3px] border-r-[3px] border-green-400/60'
+                          }`}
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                        />
                       </div>
                     </div>
                   </div>
@@ -626,7 +641,7 @@ const PredictionPage: React.FC = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.7 }}
-              className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-blue-400/30 shadow-xl p-6"
+              className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-blue-400/30 shadow-xl p-6 overflow-hidden"
             >
               <div className="flex items-center gap-3 mb-6">
                 <Shield className="w-6 h-6 text-blue-400" />
@@ -650,17 +665,19 @@ const PredictionPage: React.FC = () => {
                   transition={{ duration: 0.5 }}
                   className="space-y-6"
                 >
-                  <div className="relative">
-                    <div className="flex items-center justify-center">
-                      <div className={`relative w-40 h-40 rounded-full flex items-center justify-center ${
-                        resultSlope.factor_of_safety < 1.0 
-                          ? 'bg-gradient-to-br from-red-500/20 to-red-600/20 border-4 border-red-500/50'
-                          : resultSlope.factor_of_safety < 1.5
-                          ? 'bg-gradient-to-br from-orange-500/20 to-orange-600/20 border-4 border-orange-500/50'
-                          : 'bg-gradient-to-br from-green-500/20 to-green-600/20 border-4 border-green-500/50'
-                      }`}>
-                        <div className="text-center">
-                          <div className={`text-5xl font-bold ${
+                  <div className="relative flex items-center justify-center py-8 overflow-hidden">
+                    <div className={`relative w-52 h-52 rounded-full flex items-center justify-center shadow-2xl overflow-hidden ${
+                      resultSlope.factor_of_safety < 1.0 
+                        ? 'bg-gradient-to-br from-red-500/20 to-red-600/20 border-[6px] border-red-500/50'
+                        : resultSlope.factor_of_safety < 1.5
+                        ? 'bg-gradient-to-br from-orange-500/20 to-orange-600/20 border-[6px] border-orange-500/50'
+                        : 'bg-gradient-to-br from-green-500/20 to-green-600/20 border-[6px] border-green-500/50'
+                    }`}>
+                      {/* Inner content container - prevents any overflow */}
+                      <div className="absolute inset-0 flex items-center justify-center rounded-full overflow-hidden">
+                        {/* FoS Value display */}
+                        <div className="text-center z-20 relative">
+                          <div className={`text-6xl font-bold ${
                             resultSlope.factor_of_safety < 1.0 
                               ? 'text-red-400'
                               : resultSlope.factor_of_safety < 1.5
@@ -669,8 +686,21 @@ const PredictionPage: React.FC = () => {
                           }`}>
                             {resultSlope.factor_of_safety.toFixed(2)}
                           </div>
-                          <div className="text-white text-xs mt-1">FoS Value</div>
+                          <div className="text-white text-sm mt-2 font-medium">FoS Value</div>
                         </div>
+
+                        {/* Animated ring indicator - stays within circle */}
+                        <motion.div
+                          className={`absolute inset-2 rounded-full ${
+                            resultSlope.factor_of_safety < 1.0 
+                              ? 'border-t-[3px] border-r-[3px] border-red-400/60'
+                              : resultSlope.factor_of_safety < 1.5
+                              ? 'border-t-[3px] border-r-[3px] border-orange-400/60'
+                              : 'border-t-[3px] border-r-[3px] border-green-400/60'
+                          }`}
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                        />
                       </div>
                     </div>
                   </div>
