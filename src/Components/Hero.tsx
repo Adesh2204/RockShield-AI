@@ -64,20 +64,20 @@ const Hero: React.FC<HeroProps> = ({ onScrollToDemo }) => {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto"
         >
-          {/* Drone Animation Placeholder */}
+          {/* Mountain Animation */}
           <motion.div
             className="mb-8 relative"
-            initial={{ x: -100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1.5, delay: 0.5 }}
           >
             <div className="w-32 h-32 mx-auto bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center shadow-2xl">
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 className="text-6xl"
               >
-                🚁
+                ⛰️
               </motion.div>
             </div>
             <motion.div
