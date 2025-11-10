@@ -1,5 +1,6 @@
 import joblib
 import pandas as pd
+import numpy as np
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 app = Flask(__name__)
@@ -82,15 +83,51 @@ def predict_risk():
             return jsonify({'error': f"Missing fields: {', '.join(missing)}"}), 400
 
         if model_risk is None or le_trigger is None or le_size is None or le_division is None:
-            # Heuristic fallback if real model/encoders are unavailable
+            # Improved heuristic fallback with more realistic calculations
             lat = float(data['latitude'])
             lon = float(data['longitude'])
             rain = float(data['annual_rainfall_mm'])
-            trigger_score = 0.6 if str(data['landslide_trigger']).lower() == 'rainfall' else 0.4
-            size_score = 0.7 if str(data['landslide_size']).lower() == 'large' else (0.5 if str(data['landslide_size']).lower() == 'medium' else 0.3)
-            geo_score = (abs(lat) + abs(lon)) % 1 * 0.2
-            score = min(0.99, max(0.01, 0.3 * trigger_score + 0.3 * size_score + 0.4 * (rain / 2000.0) + geo_score))
-            return jsonify({'high_risk_probability': round(score, 4), 'fallback': True}), 200
+            
+            # More sophisticated risk calculation
+            trigger = str(data['landslide_trigger']).lower()
+            size = str(data['landslide_size']).lower()
+            
+            # Base risk from rainfall (normalized)
+            rain_risk = min(0.8, rain / 2500.0)  # High rainfall areas
+            
+            # Trigger risk factors
+            trigger_risks = {
+                'rainfall': 0.7, 'earthquake': 0.8, 'human activity': 0.6, 
+                'construction': 0.5, 'mining': 0.65
+            }
+            trigger_risk = trigger_risks.get(trigger, 0.5)
+            
+            # Size risk factors
+            size_risks = {
+                'small': 0.2, 'medium': 0.5, 'large': 0.8, 'very large': 0.95
+            }
+            size_risk = size_risks.get(size, 0.5)
+            
+            # Geographic risk (some areas more prone)
+            geo_risk = (abs(lat - 25) / 10 + abs(lon - 80) / 20) * 0.1
+            
+            # Combined risk score
+            combined_risk = (
+                rain_risk * 0.35 + 
+                trigger_risk * 0.30 + 
+                size_risk * 0.25 + 
+                geo_risk * 0.10
+            )
+            
+            # Add realistic variability
+            variability = np.random.normal(0, 0.1)
+            final_risk = max(0.05, min(0.95, combined_risk + variability))
+            
+            return jsonify({
+                'high_risk_probability': round(final_risk, 4), 
+                'fallback': True,
+                'risk_level': 'HIGH' if final_risk > 0.7 else 'MEDIUM' if final_risk > 0.3 else 'LOW'
+            }), 200
 
         # Real model path
         if data['admin_division_name'] not in le_division.classes_:
@@ -111,7 +148,18 @@ def predict_risk():
         prediction_proba = model_risk.predict_proba(input_df[features_risk])
         high_risk_probability = prediction_proba[0][1]
 
-        return jsonify({'high_risk_probability': round(high_risk_probability, 4)})
+        # Determine risk level based on your requirements
+        if high_risk_probability > 0.7:
+            risk_level = 'HIGH'
+        elif high_risk_probability > 0.3:
+            risk_level = 'MEDIUM'  
+        else:
+            risk_level = 'LOW'
+
+        return jsonify({
+            'high_risk_probability': round(high_risk_probability, 4),
+            'risk_level': risk_level
+        })
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 

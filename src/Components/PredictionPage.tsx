@@ -391,8 +391,8 @@ const PredictionPage: React.FC = () => {
                     <div className={`relative w-52 h-52 rounded-full flex items-center justify-center shadow-2xl overflow-hidden ${
                       resultRisk.high_risk_probability > 0.7 
                         ? 'bg-gradient-to-br from-red-500/20 to-red-600/20 border-[6px] border-red-500/50'
-                        : resultRisk.high_risk_probability > 0.4
-                        ? 'bg-gradient-to-br from-orange-500/20 to-orange-600/20 border-[6px] border-orange-500/50'
+                        : resultRisk.high_risk_probability > 0.3
+                        ? 'bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 border-[6px] border-yellow-500/50'
                         : 'bg-gradient-to-br from-green-500/20 to-green-600/20 border-[6px] border-green-500/50'
                     }`}>
                       {/* Inner content container - prevents any overflow */}
@@ -402,8 +402,8 @@ const PredictionPage: React.FC = () => {
                           <div className={`text-6xl font-bold ${
                             resultRisk.high_risk_probability > 0.7 
                               ? 'text-red-400'
-                              : resultRisk.high_risk_probability > 0.4
-                              ? 'text-orange-400'
+                              : resultRisk.high_risk_probability > 0.3
+                              ? 'text-yellow-400'
                               : 'text-green-400'
                           }`}>
                             {Math.round(resultRisk.high_risk_probability * 100)}%
@@ -416,8 +416,8 @@ const PredictionPage: React.FC = () => {
                           className={`absolute inset-2 rounded-full ${
                             resultRisk.high_risk_probability > 0.7 
                               ? 'border-t-[3px] border-r-[3px] border-red-400/60'
-                              : resultRisk.high_risk_probability > 0.4
-                              ? 'border-t-[3px] border-r-[3px] border-orange-400/60'
+                              : resultRisk.high_risk_probability > 0.3
+                              ? 'border-t-[3px] border-r-[3px] border-yellow-400/60'
                               : 'border-t-[3px] border-r-[3px] border-green-400/60'
                           }`}
                           animate={{ rotate: 360 }}
@@ -431,8 +431,8 @@ const PredictionPage: React.FC = () => {
                     <div className={`p-4 rounded-xl ${
                       resultRisk.high_risk_probability > 0.7 
                         ? 'bg-red-500/20 border border-red-400/30'
-                        : resultRisk.high_risk_probability > 0.4
-                        ? 'bg-orange-500/20 border border-orange-400/30'
+                        : resultRisk.high_risk_probability > 0.3
+                        ? 'bg-yellow-500/20 border border-yellow-400/30'
                         : 'bg-green-500/20 border border-green-400/30'
                     }`}>
                       <div className="flex items-center justify-between mb-2">
@@ -440,17 +440,17 @@ const PredictionPage: React.FC = () => {
                         <span className={`px-3 py-1 rounded-full text-sm font-bold ${
                           resultRisk.high_risk_probability > 0.7 
                             ? 'bg-red-500 text-white'
-                            : resultRisk.high_risk_probability > 0.4
-                            ? 'bg-orange-500 text-white'
+                            : resultRisk.high_risk_probability > 0.3
+                            ? 'bg-yellow-500 text-black'
                             : 'bg-green-500 text-white'
                         }`}>
-                          {resultRisk.high_risk_probability > 0.7 ? 'HIGH RISK' : resultRisk.high_risk_probability > 0.4 ? 'MEDIUM RISK' : 'LOW RISK'}
+                          {resultRisk.high_risk_probability > 0.7 ? 'HIGH RISK' : resultRisk.high_risk_probability > 0.3 ? 'MEDIUM RISK' : 'LOW RISK'}
                         </span>
                       </div>
                       <p className="text-blue-100 text-sm">
                         {resultRisk.high_risk_probability > 0.7 
                           ? 'Immediate safety measures required. High probability of rockfall incident.'
-                          : resultRisk.high_risk_probability > 0.4
+                          : resultRisk.high_risk_probability > 0.3
                           ? 'Moderate risk detected. Regular monitoring and preventive measures recommended.'
                           : 'Low risk level. Continue standard safety protocols.'}
                       </p>
