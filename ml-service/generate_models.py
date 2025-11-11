@@ -20,27 +20,57 @@ trigger_encoded = np.random.randint(0, 5, n_samples)  # 0-4 for 5 trigger types
 size_encoded = np.random.randint(0, 4, n_samples)     # 0-3 for 4 size categories  
 division_encoded = np.random.randint(0, 6, n_samples)  # 0-5 for 6 divisions (fixed)
 
-# Create realistic risk correlation
-# High risk factors: high rainfall, certain triggers, large landslides, specific locations
+# Create realistic risk correlation with better feature weights
+# High risk factors: high rainfall, dangerous triggers, large landslides, specific locations
+
+# Enhanced trigger risk mapping (more nuanced)
+trigger_risks = {
+    0: 0.25,  # Construction - lower risk
+    1: 0.85,  # Earthquake - very high risk  
+    2: 0.55,  # Human Activity - medium-high risk
+    3: 0.75,  # Mining - high risk
+    4: 0.65   # Rainfall - medium-high risk
+}
+
+# Enhanced size risk mapping
+size_risks = {
+    0: 0.2,  # Large - high risk (note: sklearn sorts alphabetically)
+    1: 0.4,  # Medium - medium risk
+    2: 0.1,  # Small - low risk
+    3: 0.8   # Very Large - very high risk
+}
+
+# Calculate more realistic risk scores
+trigger_risk_scores = np.array([trigger_risks[t] for t in trigger_encoded])
+size_risk_scores = np.array([size_risks[s] for s in size_encoded])
+
+# Rainfall risk (normalized and scaled with better curve)
+rainfall_risk = np.power(np.clip(rainfall_mm / 2200.0, 0, 1), 1.2)  # Slight curve for better distribution
+
+# Location risk (some areas more prone to landslides)
+location_risk = (division_encoded + 1) / 6.0 * 0.3  # Reduced location impact
+
+# Combined risk calculation with better weights
 risk_score = (
-    (rainfall_mm / 2500.0) * 0.35 +   # Higher rainfall = higher risk
-    ((trigger_encoded + 1) / 5.0) * 0.25 +  # Some triggers more dangerous
-    ((size_encoded + 1) / 4.0) * 0.25 +     # Larger landslides = higher risk
-    ((division_encoded + 1) / 6.0) * 0.10 + # Location factor (fixed for 6 divisions)
-    0.05  # Base risk level
+    rainfall_risk * 0.4 +           # 40% rainfall impact
+    trigger_risk_scores * 0.35 +    # 35% trigger impact
+    size_risk_scores * 0.20 +       # 20% size impact  
+    location_risk * 0.05            # 5% location impact
 )
 
-# Add some noise and geological factors
-geological_risk = np.random.normal(0, 0.15, n_samples)  # Increased variability
-risk_score += geological_risk
+# Add geological variability
+geological_noise = np.random.normal(0, 0.12, n_samples)
+risk_score += geological_noise
 
-# Ensure we get better distribution across risk levels
-risk_score = np.clip(risk_score, 0.05, 0.95)  # Keep in reasonable range
+# Ensure proper range and distribution
+risk_score = np.clip(risk_score, 0.05, 0.95)
 
-# Convert to binary classification (high/low risk)
-# Use dynamic threshold to create meaningful distribution with more medium risk
-risk_threshold = np.percentile(risk_score, 50)  # Top 50% are high risk
-y_risk = (risk_score > risk_threshold).astype(int)
+# Convert to binary classification with better thresholds
+# Create three risk levels: Low (<0.3), Medium (0.3-0.7), High (>0.7)
+risk_threshold_high = 0.65  # Top 35% become high risk
+risk_threshold_low = 0.35   # Bottom 35% become low risk
+
+y_risk = np.where(risk_score > risk_threshold_high, 1, 0)  # Binary: 1=high risk, 0=low/medium risk
 
 # Create feature matrix
 X_risk = np.column_stack([
