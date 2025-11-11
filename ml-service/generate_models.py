@@ -18,7 +18,7 @@ rainfall_mm = np.clip(rainfall_mm, 200, 3000)  # Reasonable range
 # Trigger types (encoded)
 trigger_encoded = np.random.randint(0, 5, n_samples)  # 0-4 for 5 trigger types
 size_encoded = np.random.randint(0, 4, n_samples)     # 0-3 for 4 size categories  
-division_encoded = np.random.randint(0, 5, n_samples)  # 0-4 for 5 divisions
+division_encoded = np.random.randint(0, 6, n_samples)  # 0-5 for 6 divisions (fixed)
 
 # Create realistic risk correlation
 # High risk factors: high rainfall, certain triggers, large landslides, specific locations
@@ -26,7 +26,7 @@ risk_score = (
     (rainfall_mm / 2500.0) * 0.35 +   # Higher rainfall = higher risk
     ((trigger_encoded + 1) / 5.0) * 0.25 +  # Some triggers more dangerous
     ((size_encoded + 1) / 4.0) * 0.25 +     # Larger landslides = higher risk
-    ((division_encoded + 1) / 5.0) * 0.10 + # Location factor
+    ((division_encoded + 1) / 6.0) * 0.10 + # Location factor (fixed for 6 divisions)
     0.05  # Base risk level
 )
 
