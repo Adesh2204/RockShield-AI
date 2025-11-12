@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { 
   ArrowLeft, Phone, MessageCircle, AlertTriangle, Send, 
   User, Crown, Building, Shield, Heart, Store, Truck,
-  MapPin, Clock, CheckCircle, X
+  MapPin, Clock, CheckCircle
 } from 'lucide-react';
 
 interface Authority {
