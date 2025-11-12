@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # ML Backend Service
+  # ML Backend Service (Unified ML Service)
   ml-backend:
     build: 
       context: .
@@ -10,11 +10,12 @@ services:
       - "5001:5001"
     environment:
       - FLASK_ENV=production
-      - ML_SERVICE_PORT=5001
+      - PORT=5001
+      - LOG_TO_FILE=false
       - CORS_ORIGINS=http://localhost:5173,http://localhost:5174,https://your-production-domain.com
     volumes:
-      - ./ml-service/models:/app/models
-      - ./ml-service/logs:/app/logs
+      - ./ml-service/logs:/app/ml-service/logs
+      - ./models:/app/models
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
       interval: 30s
@@ -22,6 +23,8 @@ services:
       retries: 3
       start_period: 40s
     restart: unless-stopped
+    networks:
+      - rockshield-network
 
   # Frontend Service (for production)
   frontend:
@@ -35,6 +38,8 @@ services:
     environment:
       - VITE_API_URL=http://ml-backend:5001
     restart: unless-stopped
+    networks:
+      - rockshield-network
 
   # Nginx Reverse Proxy (optional)
   nginx:
@@ -49,11 +54,13 @@ services:
       - frontend
       - ml-backend
     restart: unless-stopped
+    networks:
+      - rockshield-network
 
 volumes:
   ml_models:
   app_logs:
 
 networks:
-  default:
-    name: rockshield-network
+  rockshield-network:
+    driver: bridge

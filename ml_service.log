@@ -1,0 +1,61 @@
+2025-11-12 23:08:08,430 - __main__ - INFO - === Initializing RockShield AI ML Service ===
+2025-11-12 23:08:08,430 - __main__ - INFO - Checking model directory: /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models
+2025-11-12 23:08:09,310 - __main__ - INFO - ✓ Loaded risk model from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/rockfall_risk_model.joblib
+2025-11-12 23:08:09,336 - __main__ - INFO - ✓ Loaded slope model from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/slope_stability_model.joblib
+2025-11-12 23:08:09,337 - __main__ - INFO - ✓ Loaded trigger encoder from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/risk_trigger_encoder.joblib
+2025-11-12 23:08:09,337 - __main__ - INFO - ✓ Loaded size encoder from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/risk_size_encoder.joblib
+2025-11-12 23:08:09,338 - __main__ - INFO - ✓ Loaded division encoder from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/risk_division_encoder.joblib
+2025-11-12 23:08:09,338 - __main__ - INFO - ✓ Loaded reinforcement encoder from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/slope_reinforcement_encoder.joblib
+2025-11-12 23:08:09,338 - __main__ - INFO - ✓ Successfully loaded 2 models and 4 encoders
+2025-11-12 23:08:09,338 - __main__ - INFO - ✓ Using pre-trained ML models
+2025-11-12 23:08:09,339 - __main__ - INFO - ============================================================
+2025-11-12 23:08:09,339 - __main__ - INFO - ROCKSHIELD AI ML SERVICE STARTING
+2025-11-12 23:08:09,339 - __main__ - INFO - ============================================================
+2025-11-12 23:08:09,339 - __main__ - INFO - Service Status: healthy
+2025-11-12 23:08:09,339 - __main__ - INFO - Model Type: trained_ml
+2025-11-12 23:08:09,339 - __main__ - INFO - Using Fallback: False
+2025-11-12 23:08:09,339 - __main__ - INFO - Working Directory: /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service
+2025-11-12 23:08:09,339 - __main__ - INFO - ============================================================
+2025-11-12 23:08:09,339 - __main__ - INFO - 🚀 PRODUCTION MODE
+2025-11-12 23:08:09,339 - __main__ - INFO - 🌐 Host: 0.0.0.0, Port: 5001
+2025-11-12 23:08:09,457 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.162.51.17:5001
+2025-11-12 23:08:09,457 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-11-12 23:09:03,457 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:09:03] "GET /health HTTP/1.1" 200 -
+2025-11-12 23:09:17,792 - __main__ - INFO - Risk prediction: MEDIUM
+2025-11-12 23:09:17,794 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:09:17] "POST /predict_risk HTTP/1.1" 200 -
+2025-11-12 23:09:35,378 - __main__ - INFO - Stability prediction: STABLE
+2025-11-12 23:09:35,380 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:09:35] "POST /predict_stability HTTP/1.1" 200 -
+2025-11-12 23:15:58,965 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:15:58] "GET /health HTTP/1.1" 200 -
+2025-11-12 23:21:34,891 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:21:34] "GET /health HTTP/1.1" 200 -
+2025-11-12 23:22:38,245 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:22:38] "[33mPOST /predict HTTP/1.1[0m" 404 -
+2025-11-12 23:22:59,601 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:22:59] "GET / HTTP/1.1" 200 -
+2025-11-12 23:23:15,187 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:23:15] "[33mPOST /api/predict HTTP/1.1[0m" 404 -
+2025-11-12 23:23:37,666 - __main__ - ERROR - Risk prediction failed: Missing required field: latitude
+2025-11-12 23:23:37,666 - __main__ - INFO - Risk prediction: UNKNOWN
+2025-11-12 23:23:37,668 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:23:37] "POST /predict_risk HTTP/1.1" 200 -
+2025-11-12 23:23:48,338 - __main__ - ERROR - Risk prediction failed: Missing required field: landslide_trigger
+2025-11-12 23:23:48,339 - __main__ - INFO - Risk prediction: UNKNOWN
+2025-11-12 23:23:48,339 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:23:48] "POST /predict_risk HTTP/1.1" 200 -
+2025-11-12 23:24:00,524 - __main__ - ERROR - Risk prediction failed: Missing required field: landslide_size
+2025-11-12 23:24:00,525 - __main__ - INFO - Risk prediction: UNKNOWN
+2025-11-12 23:24:00,525 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:24:00] "POST /predict_risk HTTP/1.1" 200 -
+2025-11-12 23:26:41,427 - __main__ - INFO - Risk prediction: LOW
+2025-11-12 23:26:41,432 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:26:41] "POST /predict_risk HTTP/1.1" 200 -
+2025-11-12 23:26:53,538 - __main__ - WARNING - ML prediction failed: argument of type 'LabelEncoder' is not iterable, falling back to heuristic
+2025-11-12 23:26:53,539 - __main__ - INFO - Risk prediction: MEDIUM
+2025-11-12 23:26:53,540 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:26:53] "POST /predict_risk HTTP/1.1" 200 -
+2025-11-12 23:27:33,830 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:27:33] "GET /options HTTP/1.1" 200 -
+2025-11-12 23:27:33,845 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:27:33] "GET /options HTTP/1.1" 200 -
+2025-11-12 23:27:45,298 - __main__ - INFO - Risk prediction: MEDIUM
+2025-11-12 23:27:45,300 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:27:45] "POST /predict_risk HTTP/1.1" 200 -
+2025-11-12 23:27:54,174 - __main__ - INFO - Risk prediction: MEDIUM
+2025-11-12 23:27:54,177 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:27:54] "POST /predict_risk HTTP/1.1" 200 -
+2025-11-12 23:28:14,054 - __main__ - INFO - Risk prediction: MEDIUM
+2025-11-12 23:28:14,057 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:28:14] "POST /predict_risk HTTP/1.1" 200 -
+2025-11-12 23:28:16,992 - __main__ - INFO - Stability prediction: STABLE
+2025-11-12 23:28:16,992 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:28:16] "POST /predict_stability HTTP/1.1" 200 -
+2025-11-12 23:28:33,303 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:28:33] "GET /options HTTP/1.1" 200 -
+2025-11-12 23:28:33,308 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:28:33] "GET /options HTTP/1.1" 200 -
