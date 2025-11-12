@@ -397,6 +397,13 @@ const RiskAnalytics: React.FC = () => {
             <Shield className="w-5 h-5" />
             Run Risk Prediction
           </button>
+
+          <button
+            onClick={() => navigate('/emergency-alert')}
+            className="bg-gradient-to-r from-red-500 to-red-600 text-white px-8 py-4 rounded-2xl font-semibold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 flex items-center gap-3 justify-center hover:scale-105"
+          >
+            🚨 Alert Higher Authorities
+          </button>
           
           <button
             onClick={() => navigate('/')}

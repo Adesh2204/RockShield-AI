@@ -4,6 +4,7 @@ import App from './App.tsx';
 import PredictionPage from './Components/PredictionPage.tsx';
 import RiskAnalytics from './Components/RiskAnalytics.tsx';
 import SatelliteMap from './Components/SatelliteMap.tsx';
+import EmergencyAlert from './Components/EmergencyAlert.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
   { path: '/predict', element: <PredictionPage /> },
   { path: '/analytics', element: <RiskAnalytics /> },
   { path: '/satellite-map', element: <SatelliteMap /> },
+  { path: '/emergency-alert', element: <EmergencyAlert /> },
 ]);
 
 createRoot(document.getElementById('root')!).render(
