@@ -59,3 +59,11 @@
 2025-11-12 23:28:16,992 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:28:16] "POST /predict_stability HTTP/1.1" 200 -
 2025-11-12 23:28:33,303 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:28:33] "GET /options HTTP/1.1" 200 -
 2025-11-12 23:28:33,308 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:28:33] "GET /options HTTP/1.1" 200 -
+2025-11-13 09:56:16,145 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2025 09:56:16] "GET /options HTTP/1.1" 200 -
+2025-11-13 09:56:16,600 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2025 09:56:16] "GET /options HTTP/1.1" 200 -
+2025-11-13 09:56:30,346 - __main__ - INFO - Risk prediction: LOW
+2025-11-13 09:56:30,349 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2025 09:56:30] "POST /predict_risk HTTP/1.1" 200 -
+2025-11-13 10:07:35,663 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2025 10:07:35] "GET /options HTTP/1.1" 200 -
+2025-11-13 10:07:35,673 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2025 10:07:35] "GET /options HTTP/1.1" 200 -
+2025-11-13 10:09:55,813 - __main__ - INFO - Risk prediction: LOW
+2025-11-13 10:09:55,820 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2025 10:09:55] "POST /predict_risk HTTP/1.1" 200 -
