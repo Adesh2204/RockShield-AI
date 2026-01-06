@@ -380,7 +380,46 @@ class RobustMLService:
             cohesion = float(data.get('cohesion', 25.0))
             friction_angle = float(data.get('friction_angle', 30.0))
             reinforcement = str(data.get('reinforcement', 'None'))
-            
+            slope_height = float(data.get('slope_height', 20.0))
+            pore_water_pressure = float(data.get('pore_water_pressure', 0.2))
+
+            # Strategy 1: Use ML model if available
+            if (not self.model_status['using_fallback'] and 'slope' in self.models):
+                try:
+                    reinforcement_encoded = self._encode_categorical_safe(reinforcement, 'reinforcement')
+                    features = np.array([[unit_weight, cohesion, friction_angle, slope_angle, slope_height, pore_water_pressure, reinforcement_encoded]])
+                    fos = self.models['slope'].predict(features)[0]
+                    # Apply bounds
+                    fos = max(0.5, min(6.0, fos))
+                    # Determine status
+                    if fos > 1.5:
+                        stability_status = 'STABLE'
+                        risk_level = 'LOW'
+                    elif fos > 1.0:
+                        stability_status = 'MARGINALLY_STABLE'
+                        risk_level = 'MEDIUM'
+                    else:
+                        stability_status = 'UNSTABLE'
+                        risk_level = 'HIGH'
+                    return {
+                        'safety_factor': round(float(fos), 3),
+                        'stability_status': stability_status,
+                        'risk_level': risk_level,
+                        'method': 'ML_MODEL',
+                        'parameters': {
+                            'slope_angle': slope_angle,
+                            'unit_weight': unit_weight,
+                            'cohesion': cohesion,
+                            'friction_angle': friction_angle,
+                            'slope_height': slope_height,
+                            'pore_water_pressure': pore_water_pressure,
+                            'reinforcement': reinforcement
+                        }
+                    }
+                except Exception as e:
+                    logger.warning(f"ML slope prediction failed: {e}, falling back to heuristic")
+
+            # Strategy 2: Use heuristic
             # Simple factor of safety calculation
             slope_rad = np.radians(max(0, min(89, slope_angle)))  # Clamp angle
             friction_rad = np.radians(friction_angle)
@@ -418,12 +457,14 @@ class RobustMLService:
                 'safety_factor': round(float(safety_factor), 3),
                 'stability_status': stability_status,
                 'risk_level': risk_level,
-                'method': 'ENGINEERING_ANALYSIS',
+                'method': 'HEURISTIC',
                 'parameters': {
                     'slope_angle': slope_angle,
                     'unit_weight': unit_weight,
                     'cohesion': cohesion,
                     'friction_angle': friction_angle,
+                    'slope_height': slope_height,
+                    'pore_water_pressure': pore_water_pressure,
                     'reinforcement': reinforcement
                 }
             }

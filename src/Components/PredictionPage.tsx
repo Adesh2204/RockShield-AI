@@ -36,7 +36,12 @@ const PredictionPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultRisk, setResultRisk] = useState<null | { high_risk_probability: number }>(null);
-  const [resultSlope, setResultSlope] = useState<null | { factor_of_safety: number }>(null);
+  const [resultSlope, setResultSlope] = useState<null | { 
+    safety_factor: number; 
+    stability_status: string; 
+    risk_level: string;
+    method: string;
+  }>(null);
 
   useEffect(() => {
     const loadOptions = async () => {
@@ -92,14 +97,28 @@ const PredictionPage: React.FC = () => {
     setError(null);
     setResultSlope(null);
     try {
+      const slopeData = {
+        slope_angle: formSlope['Slope Angle (°)'],
+        unit_weight: formSlope['Unit Weight (kN/m³)'],
+        cohesion: formSlope['Cohesion (kPa)'],
+        friction_angle: formSlope['Internal Friction Angle (°)'],
+        slope_height: formSlope['Slope Height (m)'],
+        pore_water_pressure: formSlope['Pore Water Pressure Ratio'],
+        reinforcement: formSlope['Reinforcement Type']
+      };
       const res = await fetch(`${API_BASE}/predict_stability`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formSlope)
+        body: JSON.stringify(slopeData)
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
-      setResultSlope({ factor_of_safety: data.factor_of_safety });
+      setResultSlope({ 
+        safety_factor: data.safety_factor,
+        stability_status: data.stability_status,
+        risk_level: data.risk_level,
+        method: data.method
+      });
     } catch (err: any) {
       setError(err?.message || 'Prediction failed');
     } finally {
@@ -667,9 +686,9 @@ const PredictionPage: React.FC = () => {
                 >
                   <div className="relative flex items-center justify-center py-8 overflow-hidden">
                     <div className={`relative w-52 h-52 rounded-full flex items-center justify-center shadow-2xl overflow-hidden ${
-                      resultSlope.factor_of_safety < 1.0 
+                      resultSlope.safety_factor < 1.0 
                         ? 'bg-gradient-to-br from-red-500/20 to-red-600/20 border-[6px] border-red-500/50'
-                        : resultSlope.factor_of_safety < 1.5
+                        : resultSlope.safety_factor < 1.5
                         ? 'bg-gradient-to-br from-orange-500/20 to-orange-600/20 border-[6px] border-orange-500/50'
                         : 'bg-gradient-to-br from-green-500/20 to-green-600/20 border-[6px] border-green-500/50'
                     }`}>
@@ -678,13 +697,13 @@ const PredictionPage: React.FC = () => {
                         {/* FoS Value display */}
                         <div className="text-center z-20 relative">
                           <div className={`text-6xl font-bold ${
-                            resultSlope.factor_of_safety < 1.0 
+                            resultSlope.safety_factor < 1.0 
                               ? 'text-red-400'
-                              : resultSlope.factor_of_safety < 1.5
+                              : resultSlope.safety_factor < 1.5
                               ? 'text-orange-400'
                               : 'text-green-400'
                           }`}>
-                            {resultSlope.factor_of_safety.toFixed(2)}
+                            {resultSlope.safety_factor.toFixed(2)}
                           </div>
                           <div className="text-white text-sm mt-2 font-medium">FoS Value</div>
                         </div>
@@ -692,9 +711,9 @@ const PredictionPage: React.FC = () => {
                         {/* Animated ring indicator - stays within circle */}
                         <motion.div
                           className={`absolute inset-2 rounded-full ${
-                            resultSlope.factor_of_safety < 1.0 
+                            resultSlope.safety_factor < 1.0 
                               ? 'border-t-[3px] border-r-[3px] border-red-400/60'
-                              : resultSlope.factor_of_safety < 1.5
+                              : resultSlope.safety_factor < 1.5
                               ? 'border-t-[3px] border-r-[3px] border-orange-400/60'
                               : 'border-t-[3px] border-r-[3px] border-green-400/60'
                           }`}
@@ -707,28 +726,28 @@ const PredictionPage: React.FC = () => {
 
                   <div className="space-y-3">
                     <div className={`p-4 rounded-xl ${
-                      resultSlope.factor_of_safety < 1.0 
+                      resultSlope.safety_factor < 1.0 
                         ? 'bg-red-500/20 border border-red-400/30'
-                        : resultSlope.factor_of_safety < 1.5
+                        : resultSlope.safety_factor < 1.5
                         ? 'bg-orange-500/20 border border-orange-400/30'
                         : 'bg-green-500/20 border border-green-400/30'
                     }`}>
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-white font-semibold">Stability Status:</span>
                         <span className={`px-3 py-1 rounded-full text-sm font-bold ${
-                          resultSlope.factor_of_safety < 1.0 
+                          resultSlope.safety_factor < 1.0 
                             ? 'bg-red-500 text-white'
-                            : resultSlope.factor_of_safety < 1.5
+                            : resultSlope.safety_factor < 1.5
                             ? 'bg-orange-500 text-white'
                             : 'bg-green-500 text-white'
                         }`}>
-                          {resultSlope.factor_of_safety < 1.0 ? 'UNSTABLE' : resultSlope.factor_of_safety < 1.5 ? 'MARGINAL' : 'STABLE'}
+                          {resultSlope.safety_factor < 1.0 ? 'UNSTABLE' : resultSlope.safety_factor < 1.5 ? 'MARGINAL' : 'STABLE'}
                         </span>
                       </div>
                       <p className="text-blue-100 text-sm">
-                        {resultSlope.factor_of_safety < 1.0 
+                        {resultSlope.safety_factor < 1.0 
                           ? 'Critical! Slope is unstable. Immediate reinforcement required.'
-                          : resultSlope.factor_of_safety < 1.5
+                          : resultSlope.safety_factor < 1.5
                           ? 'Marginal stability. Additional support measures recommended.'
                           : 'Slope is stable under current conditions. Maintain monitoring protocols.'}
                       </p>
@@ -737,12 +756,12 @@ const PredictionPage: React.FC = () => {
                     <div className="grid grid-cols-2 gap-3">
                       <div className="bg-white/5 rounded-xl p-3 border border-white/10">
                         <div className="text-slate-400 text-xs mb-1">Factor of Safety</div>
-                        <div className="text-white font-bold">{resultSlope.factor_of_safety.toFixed(3)}</div>
+                        <div className="text-white font-bold">{resultSlope.safety_factor.toFixed(3)}</div>
                       </div>
                       <div className="bg-white/5 rounded-xl p-3 border border-white/10">
                         <div className="text-slate-400 text-xs mb-1">Safety Margin</div>
                         <div className="text-white font-bold">
-                          {resultSlope.factor_of_safety >= 1.5 ? 'Adequate' : resultSlope.factor_of_safety >= 1.0 ? 'Minimal' : 'Critical'}
+                          {resultSlope.safety_factor >= 1.5 ? 'Adequate' : resultSlope.safety_factor >= 1.0 ? 'Minimal' : 'Critical'}
                         </div>
                       </div>
                     </div>

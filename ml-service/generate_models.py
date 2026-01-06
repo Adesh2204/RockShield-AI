@@ -32,12 +32,12 @@ trigger_risks = {
     4: 0.65   # Rainfall - medium-high risk
 }
 
-# Enhanced size risk mapping
+# Enhanced size risk mapping (matches alphabetical encoding)
 size_risks = {
-    0: 0.2,  # Large - high risk (note: sklearn sorts alphabetically)
-    1: 0.4,  # Medium - medium risk
-    2: 0.1,  # Small - low risk
-    3: 0.8   # Very Large - very high risk
+    0: 0.1,  # Small - low risk
+    1: 0.3,  # Medium - medium risk
+    2: 0.6,  # Large - high risk
+    3: 0.9   # Very Large - very high risk
 }
 
 # Calculate more realistic risk scores

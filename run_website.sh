@@ -99,13 +99,13 @@ fi
 
 # Test ML service
 echo "🧪 Testing ML service..."
-RESPONSE=$(curl -s -X POST http://localhost:5001/predict \
+RESPONSE=$(curl -s -X POST http://localhost:5001/predict_risk \
     -H "Content-Type: application/json" \
-    -d '{"slope_angle":45,"rock_size":"medium","geological_structure":"layered","slope_orientation":"south","weather_conditions":"normal","precipitation":"low","temperature":20,"vegetation_cover":"sparse","human_activity":"moderate","recent_seismic_activity":"none","water_infiltration":"low","soil_moisture":"dry","rock_hardness":"medium","fracture_density":"medium","weathering_degree":"moderate","slope_length":100,"slope_height":50}' 2>/dev/null)
+    -d '{"latitude":23.5,"longitude":85.5,"landslide_trigger":"Earthquake","landslide_size":"Large","admin_division_name":"Jharkhand","annual_rainfall_mm":1500}' 2>/dev/null)
 
-if echo "$RESPONSE" | grep -q "risk_percentage"; then
-    RISK=$(echo "$RESPONSE" | grep -o '"risk_percentage":[0-9.]*' | cut -d':' -f2)
-    echo "✅ ML service test successful - Risk: ${RISK}%"
+if echo "$RESPONSE" | grep -q "high_risk_probability"; then
+    RISK=$(echo "$RESPONSE" | grep -o '"high_risk_probability":[0-9.]*' | cut -d':' -f2)
+    echo "✅ ML service test successful - Risk: ${RISK}"
 else
     echo "❌ ML service test failed"
     echo "Response: $RESPONSE"
