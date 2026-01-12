@@ -33,3 +33,29 @@
 2026-01-06 22:05:19,694 - __main__ - INFO - Stability prediction: STABLE
 2026-01-06 22:05:19,694 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:05:19] "POST /predict_stability HTTP/1.1" 200 -
 2026-01-06 22:05:23,651 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:05:23] "GET /options HTTP/1.1" 200 -
+2026-01-06 22:06:31,819 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:31] "GET /options HTTP/1.1" 200 -
+2026-01-06 22:06:31,826 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:31] "GET /options HTTP/1.1" 200 -
+2026-01-06 22:06:33,516 - __main__ - INFO - Risk prediction: LOW
+2026-01-06 22:06:33,516 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:33] "POST /predict_risk HTTP/1.1" 200 -
+2026-01-06 22:06:35,656 - __main__ - WARNING - ML slope prediction failed: argument of type 'LabelEncoder' is not iterable, falling back to heuristic
+2026-01-06 22:06:35,658 - __main__ - INFO - Stability prediction: STABLE
+2026-01-06 22:06:35,659 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:35] "POST /predict_stability HTTP/1.1" 200 -
+2026-01-06 22:06:40,487 - __main__ - WARNING - ML slope prediction failed: argument of type 'LabelEncoder' is not iterable, falling back to heuristic
+2026-01-06 22:06:40,487 - __main__ - INFO - Stability prediction: STABLE
+2026-01-06 22:06:40,487 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:40] "POST /predict_stability HTTP/1.1" 200 -
+2026-01-06 22:06:44,520 - __main__ - WARNING - ML slope prediction failed: argument of type 'LabelEncoder' is not iterable, falling back to heuristic
+2026-01-06 22:06:44,521 - __main__ - INFO - Stability prediction: STABLE
+2026-01-06 22:06:44,521 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:44] "POST /predict_stability HTTP/1.1" 200 -
+2026-01-06 22:06:50,519 - __main__ - WARNING - ML slope prediction failed: argument of type 'LabelEncoder' is not iterable, falling back to heuristic
+2026-01-06 22:06:50,519 - __main__ - INFO - Stability prediction: STABLE
+2026-01-06 22:06:50,520 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:50] "POST /predict_stability HTTP/1.1" 200 -
+2026-01-06 22:06:54,186 - __main__ - WARNING - ML slope prediction failed: argument of type 'LabelEncoder' is not iterable, falling back to heuristic
+2026-01-06 22:06:54,186 - __main__ - INFO - Stability prediction: STABLE
+2026-01-06 22:06:54,187 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:54] "POST /predict_stability HTTP/1.1" 200 -
+2026-01-06 23:11:24,580 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 23:11:24] "GET /options HTTP/1.1" 200 -
+2026-01-06 23:11:24,586 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 23:11:24] "GET /options HTTP/1.1" 200 -
+2026-01-06 23:12:09,407 - __main__ - INFO - Risk prediction: MEDIUM
+2026-01-06 23:12:09,407 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 23:12:09] "POST /predict_risk HTTP/1.1" 200 -
+2026-01-06 23:12:47,814 - __main__ - WARNING - ML slope prediction failed: argument of type 'LabelEncoder' is not iterable, falling back to heuristic
+2026-01-06 23:12:47,816 - __main__ - INFO - Stability prediction: STABLE
+2026-01-06 23:12:47,816 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 23:12:47] "POST /predict_stability HTTP/1.1" 200 -
