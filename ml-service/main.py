@@ -85,29 +85,63 @@ class RobustMLService:
     
     def _encode_categorical_safe(self, value: str, encoder_name: str) -> int:
         """Safely encode categorical values with multiple fallback strategies"""
-        encoder = self.encoders.get(encoder_name, {})
-        if not encoder:
+        encoder = self.encoders.get(encoder_name)
+        if encoder is None:
             return 0
-        
-        # Try exact match
-        if value in encoder:
-            return encoder[value]
-        
-        # Try case-insensitive match
-        value_lower = value.lower()
-        for key in encoder:
-            if key.lower() == value_lower:
-                return encoder[key]
-        
-        # Try partial match (for similar terms)
-        for key in encoder:
-            if value_lower in key.lower() or key.lower() in value_lower:
-                return encoder[key]
-        
-        # Final fallback - hash-based with bounds checking
-        hashed = abs(hash(value)) % len(encoder)
-        logger.warning(f"Using fallback encoding for {encoder_name}: '{value}' -> {hashed}")
-        return hashed
+
+        value_text = str(value).strip()
+        value_lower = value_text.lower()
+
+        # Support dict-based encoders used by heuristic/embedded fallbacks.
+        if isinstance(encoder, dict):
+            if not encoder:
+                return 0
+
+            # Try exact match
+            if value_text in encoder:
+                return int(encoder[value_text])
+
+            # Try case-insensitive match
+            for key, encoded in encoder.items():
+                if str(key).strip().lower() == value_lower:
+                    return int(encoded)
+
+            # Try partial match (for similar terms)
+            for key, encoded in encoder.items():
+                key_lower = str(key).strip().lower()
+                if value_lower in key_lower or key_lower in value_lower:
+                    return int(encoded)
+
+            # Final fallback - hash-based with bounds checking
+            hashed = abs(hash(value_text)) % len(encoder)
+            logger.warning(f"Using fallback encoding for {encoder_name}: '{value_text}' -> {hashed}")
+            return int(hashed)
+
+        # Support sklearn LabelEncoder-style objects loaded from joblib.
+        if hasattr(encoder, 'transform'):
+            try:
+                return int(encoder.transform([value_text])[0])
+            except Exception:
+                classes = list(getattr(encoder, 'classes_', []))
+                if not classes:
+                    return 0
+
+                # Case-insensitive class lookup
+                class_lookup = {str(c).strip().lower(): c for c in classes}
+                if value_lower in class_lookup:
+                    return int(encoder.transform([class_lookup[value_lower]])[0])
+
+                # Partial class lookup
+                for candidate in classes:
+                    candidate_lower = str(candidate).strip().lower()
+                    if value_lower in candidate_lower or candidate_lower in value_lower:
+                        return int(encoder.transform([candidate])[0])
+
+                hashed = abs(hash(value_text)) % len(classes)
+                logger.warning(f"Using fallback encoding for {encoder_name}: '{value_text}' -> {hashed}")
+                return int(hashed)
+
+        return 0
     
     def _try_load_joblib_models(self) -> bool:
         """Attempt to load pre-trained joblib models with detailed logging"""
@@ -370,6 +404,36 @@ class RobustMLService:
                 'geographic': round(geo_risk * 0.10, 3)
             }
         }
+
+    def _normalize_reinforcement_value(self, reinforcement: str) -> str:
+        """Normalize frontend reinforcement labels to known model classes."""
+        value = str(reinforcement).strip()
+        if not value:
+            return 'None'
+
+        aliases = {
+            'none': 'None',
+            'anchor': 'Anchors',
+            'anchors': 'Anchors',
+            'mesh': 'Shotcrete',
+            'wire mesh': 'Shotcrete',
+            'shotcrete': 'Shotcrete',
+            'rock bolt': 'Rock Bolts',
+            'rock bolts': 'Rock Bolts',
+            'retaining wall': 'Retaining Wall'
+        }
+
+        lower_value = value.lower()
+        if lower_value in aliases:
+            return aliases[lower_value]
+
+        encoder = self.encoders.get('reinforcement')
+        classes = list(getattr(encoder, 'classes_', [])) if encoder is not None else []
+        for cls in classes:
+            if str(cls).strip().lower() == lower_value:
+                return str(cls)
+
+        return value
     
     def predict_stability(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Predict slope stability with engineering analysis"""
@@ -379,7 +443,7 @@ class RobustMLService:
             unit_weight = float(data.get('unit_weight', 18.0))
             cohesion = float(data.get('cohesion', 25.0))
             friction_angle = float(data.get('friction_angle', 30.0))
-            reinforcement = str(data.get('reinforcement', 'None'))
+            reinforcement = self._normalize_reinforcement_value(str(data.get('reinforcement', 'None')))
             slope_height = float(data.get('slope_height', 20.0))
             pore_water_pressure = float(data.get('pore_water_pressure', 0.2))
 
@@ -434,7 +498,13 @@ class RobustMLService:
             
             # Apply reinforcement
             reinforcement_factors = {
-                'none': 1.0, 'anchor': 1.6, 'mesh': 1.3, 'retaining wall': 2.2
+                'none': 1.0,
+                'anchor': 1.6,
+                'anchors': 1.6,
+                'mesh': 1.3,
+                'shotcrete': 1.4,
+                'rock bolts': 1.5,
+                'retaining wall': 2.2
             }
             reinforcement_factor = reinforcement_factors.get(reinforcement.lower(), 1.0)
             safety_factor = base_fs * reinforcement_factor

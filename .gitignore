@@ -47,3 +47,8 @@ These should be shared via cloud storage, not Git
 *.csv
 *.json
 *.sqlite
+
+# Runtime service artifacts
+.runtime/
+.ml_service.pid
+ml_service.log

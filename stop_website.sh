@@ -19,6 +19,19 @@ if [ -f ".ml_service.pid" ]; then
     rm -f .ml_service.pid
 fi
 
+# Stop ML service started by start_backend.sh
+if [ -f ".runtime/ml_service.pid" ]; then
+    ML_PID=$(cat .runtime/ml_service.pid)
+    if kill -0 $ML_PID 2>/dev/null; then
+        echo "🧠 Stopping ML Service (PID: $ML_PID)..."
+        kill $ML_PID
+        echo "✅ ML Service stopped"
+    else
+        echo "ℹ️  ML Service was not running"
+    fi
+    rm -f .runtime/ml_service.pid
+fi
+
 # Stop frontend
 if [ -f ".frontend.pid" ]; then
     FRONTEND_PID=$(cat .frontend.pid)
@@ -35,6 +48,8 @@ fi
 # Kill any remaining processes
 echo "🔍 Cleaning up any remaining processes..."
 pkill -f "python ml-service/main.py" 2>/dev/null
+pkill -f "python3 ml-service/main.py" 2>/dev/null
+kill $(lsof -ti tcp:5001 2>/dev/null) 2>/dev/null || true
 pkill -f "npm run dev" 2>/dev/null
 pkill -f "vite" 2>/dev/null
 

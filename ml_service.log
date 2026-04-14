@@ -1,61 +1,38 @@
-2026-01-06 22:04:58,806 - __main__ - INFO - === Initializing RockShield AI ML Service ===
-2026-01-06 22:04:58,807 - __main__ - INFO - Checking model directory: /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models
-2026-01-06 22:05:00,342 - __main__ - INFO - ✓ Loaded risk model from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/rockfall_risk_model.joblib
-2026-01-06 22:05:00,360 - __main__ - INFO - ✓ Loaded slope model from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/slope_stability_model.joblib
-2026-01-06 22:05:00,361 - __main__ - INFO - ✓ Loaded trigger encoder from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/risk_trigger_encoder.joblib
-2026-01-06 22:05:00,361 - __main__ - INFO - ✓ Loaded size encoder from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/risk_size_encoder.joblib
-2026-01-06 22:05:00,362 - __main__ - INFO - ✓ Loaded division encoder from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/risk_division_encoder.joblib
-2026-01-06 22:05:00,362 - __main__ - INFO - ✓ Loaded reinforcement encoder from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/slope_reinforcement_encoder.joblib
-2026-01-06 22:05:00,362 - __main__ - INFO - ✓ Successfully loaded 2 models and 4 encoders
-2026-01-06 22:05:00,362 - __main__ - INFO - ✓ Using pre-trained ML models
-2026-01-06 22:05:00,363 - __main__ - INFO - ============================================================
-2026-01-06 22:05:00,363 - __main__ - INFO - ROCKSHIELD AI ML SERVICE STARTING
-2026-01-06 22:05:00,363 - __main__ - INFO - ============================================================
-2026-01-06 22:05:00,363 - __main__ - INFO - Service Status: healthy
-2026-01-06 22:05:00,363 - __main__ - INFO - Model Type: trained_ml
-2026-01-06 22:05:00,363 - __main__ - INFO - Using Fallback: False
-2026-01-06 22:05:00,363 - __main__ - INFO - Working Directory: /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service
-2026-01-06 22:05:00,363 - __main__ - INFO - ============================================================
-2026-01-06 22:05:00,363 - __main__ - INFO - 🔧 DEVELOPMENT MODE
-2026-01-06 22:05:00,363 - __main__ - INFO - 🌐 Local server: http://localhost:5001
+2026-04-11 11:16:02,020 - __main__ - INFO - === Initializing RockShield AI ML Service ===
+2026-04-11 11:16:02,021 - __main__ - INFO - Checking model directory: /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models
+2026-04-11 11:16:04,727 - __main__ - INFO - ✓ Loaded risk model from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/rockfall_risk_model.joblib
+2026-04-11 11:16:04,748 - __main__ - INFO - ✓ Loaded slope model from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/slope_stability_model.joblib
+2026-04-11 11:16:04,748 - __main__ - INFO - ✓ Loaded trigger encoder from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/risk_trigger_encoder.joblib
+2026-04-11 11:16:04,748 - __main__ - INFO - ✓ Loaded size encoder from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/risk_size_encoder.joblib
+2026-04-11 11:16:04,749 - __main__ - INFO - ✓ Loaded division encoder from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/risk_division_encoder.joblib
+2026-04-11 11:16:04,749 - __main__ - INFO - ✓ Loaded reinforcement encoder from /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service/models/slope_reinforcement_encoder.joblib
+2026-04-11 11:16:04,749 - __main__ - INFO - ✓ Successfully loaded 2 models and 4 encoders
+2026-04-11 11:16:04,749 - __main__ - INFO - ✓ Using pre-trained ML models
+2026-04-11 11:16:04,750 - __main__ - INFO - ============================================================
+2026-04-11 11:16:04,750 - __main__ - INFO - ROCKSHIELD AI ML SERVICE STARTING
+2026-04-11 11:16:04,750 - __main__ - INFO - ============================================================
+2026-04-11 11:16:04,750 - __main__ - INFO - Service Status: healthy
+2026-04-11 11:16:04,750 - __main__ - INFO - Model Type: trained_ml
+2026-04-11 11:16:04,750 - __main__ - INFO - Using Fallback: False
+2026-04-11 11:16:04,750 - __main__ - INFO - Working Directory: /Users/adesh/Developer AIML SEM 3/Developer AIML SEM 5/Develpoer AIML semester 4 /Trading and Profits /SUPER PROJECTS /RockShield-AI/ml-service
+2026-04-11 11:16:04,750 - __main__ - INFO - ============================================================
+2026-04-11 11:16:04,751 - __main__ - INFO - 🔧 DEVELOPMENT MODE
+2026-04-11 11:16:04,751 - __main__ - INFO - 🌐 Local server: http://localhost:5001
  * Serving Flask app 'main'
  * Debug mode: off
-2026-01-06 22:05:00,377 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+2026-04-11 11:16:07,551 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5001
-2026-01-06 22:05:00,377 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
-2026-01-06 22:05:01,225 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:05:01] "GET /health HTTP/1.1" 200 -
-2026-01-06 22:05:01,243 - __main__ - INFO - Risk prediction: MEDIUM
-2026-01-06 22:05:01,243 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:05:01] "POST /predict_risk HTTP/1.1" 200 -
-2026-01-06 22:05:11,044 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:05:11] "GET /health HTTP/1.1" 200 -
-2026-01-06 22:05:14,990 - __main__ - INFO - Risk prediction: MEDIUM
-2026-01-06 22:05:14,990 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:05:14] "POST /predict_risk HTTP/1.1" 200 -
-2026-01-06 22:05:19,694 - __main__ - WARNING - ML slope prediction failed: argument of type 'LabelEncoder' is not iterable, falling back to heuristic
-2026-01-06 22:05:19,694 - __main__ - INFO - Stability prediction: STABLE
-2026-01-06 22:05:19,694 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:05:19] "POST /predict_stability HTTP/1.1" 200 -
-2026-01-06 22:05:23,651 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:05:23] "GET /options HTTP/1.1" 200 -
-2026-01-06 22:06:31,819 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:31] "GET /options HTTP/1.1" 200 -
-2026-01-06 22:06:31,826 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:31] "GET /options HTTP/1.1" 200 -
-2026-01-06 22:06:33,516 - __main__ - INFO - Risk prediction: LOW
-2026-01-06 22:06:33,516 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:33] "POST /predict_risk HTTP/1.1" 200 -
-2026-01-06 22:06:35,656 - __main__ - WARNING - ML slope prediction failed: argument of type 'LabelEncoder' is not iterable, falling back to heuristic
-2026-01-06 22:06:35,658 - __main__ - INFO - Stability prediction: STABLE
-2026-01-06 22:06:35,659 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:35] "POST /predict_stability HTTP/1.1" 200 -
-2026-01-06 22:06:40,487 - __main__ - WARNING - ML slope prediction failed: argument of type 'LabelEncoder' is not iterable, falling back to heuristic
-2026-01-06 22:06:40,487 - __main__ - INFO - Stability prediction: STABLE
-2026-01-06 22:06:40,487 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:40] "POST /predict_stability HTTP/1.1" 200 -
-2026-01-06 22:06:44,520 - __main__ - WARNING - ML slope prediction failed: argument of type 'LabelEncoder' is not iterable, falling back to heuristic
-2026-01-06 22:06:44,521 - __main__ - INFO - Stability prediction: STABLE
-2026-01-06 22:06:44,521 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:44] "POST /predict_stability HTTP/1.1" 200 -
-2026-01-06 22:06:50,519 - __main__ - WARNING - ML slope prediction failed: argument of type 'LabelEncoder' is not iterable, falling back to heuristic
-2026-01-06 22:06:50,519 - __main__ - INFO - Stability prediction: STABLE
-2026-01-06 22:06:50,520 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:50] "POST /predict_stability HTTP/1.1" 200 -
-2026-01-06 22:06:54,186 - __main__ - WARNING - ML slope prediction failed: argument of type 'LabelEncoder' is not iterable, falling back to heuristic
-2026-01-06 22:06:54,186 - __main__ - INFO - Stability prediction: STABLE
-2026-01-06 22:06:54,187 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:54] "POST /predict_stability HTTP/1.1" 200 -
-2026-01-06 23:11:24,580 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 23:11:24] "GET /options HTTP/1.1" 200 -
-2026-01-06 23:11:24,586 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 23:11:24] "GET /options HTTP/1.1" 200 -
-2026-01-06 23:12:09,407 - __main__ - INFO - Risk prediction: MEDIUM
-2026-01-06 23:12:09,407 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 23:12:09] "POST /predict_risk HTTP/1.1" 200 -
-2026-01-06 23:12:47,814 - __main__ - WARNING - ML slope prediction failed: argument of type 'LabelEncoder' is not iterable, falling back to heuristic
-2026-01-06 23:12:47,816 - __main__ - INFO - Stability prediction: STABLE
-2026-01-06 23:12:47,816 - werkzeug - INFO - 127.0.0.1 - - [06/Jan/2026 23:12:47] "POST /predict_stability HTTP/1.1" 200 -
+2026-04-11 11:16:07,551 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-04-11 11:16:08,930 - werkzeug - INFO - 127.0.0.1 - - [11/Apr/2026 11:16:08] "GET /health HTTP/1.1" 200 -
+2026-04-11 11:16:08,957 - werkzeug - INFO - 127.0.0.1 - - [11/Apr/2026 11:16:08] "GET /health HTTP/1.1" 200 -
+2026-04-11 11:16:08,977 - __main__ - INFO - Stability prediction: UNSTABLE
+2026-04-11 11:16:08,977 - werkzeug - INFO - 127.0.0.1 - - [11/Apr/2026 11:16:08] "POST /predict_stability HTTP/1.1" 200 -
+2026-04-11 11:16:20,484 - werkzeug - INFO - 127.0.0.1 - - [11/Apr/2026 11:16:20] "GET /health HTTP/1.1" 200 -
+2026-04-11 11:17:11,938 - werkzeug - INFO - 127.0.0.1 - - [11/Apr/2026 11:17:11] "GET /health HTTP/1.1" 200 -
+2026-04-11 11:17:34,646 - __main__ - WARNING - Using fallback encoding for reinforcement: 'Mesh' -> 0
+2026-04-11 11:17:34,650 - __main__ - INFO - Stability prediction: UNSTABLE
+2026-04-11 11:17:34,651 - werkzeug - INFO - 127.0.0.1 - - [11/Apr/2026 11:17:34] "POST /predict_stability HTTP/1.1" 200 -
+2026-04-11 11:18:35,799 - werkzeug - INFO - 127.0.0.1 - - [11/Apr/2026 11:18:35] "GET /health HTTP/1.1" 200 -
+2026-04-11 11:18:35,810 - werkzeug - INFO - 127.0.0.1 - - [11/Apr/2026 11:18:35] "GET /health HTTP/1.1" 200 -
+2026-04-11 11:18:35,825 - __main__ - INFO - Stability prediction: UNSTABLE
+2026-04-11 11:18:35,826 - werkzeug - INFO - 127.0.0.1 - - [11/Apr/2026 11:18:35] "POST /predict_stability HTTP/1.1" 200 -
